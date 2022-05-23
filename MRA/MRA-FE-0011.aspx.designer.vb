@@ -23,11 +23,29 @@ Partial Public Class MRA_FE_0011
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''GridView1 control.
+    '''TXT_ID control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents TXT_ID As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''TXT_PW control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TXT_PW As Global.System.Web.UI.HtmlControls.HtmlInputPassword
+
+    '''<summary>
+    '''BTN_LOGIN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_LOGIN As Global.System.Web.UI.HtmlControls.HtmlButton
 End Class
