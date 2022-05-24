@@ -67,19 +67,24 @@
                      <!--Grid Table-->
                      <div class="div-grid1">
                      <div class="tile is-parent is-vertical">
+                                <button id="PAGE_PREV" runat="server" class="button previous">Previous</button>
+                                <button id="PAGE_NEXT" runat="server" class="button next">Next</button>
+                                <ul>
+                                  <li class="pagedivided">
+                                      <span id="CURRENT_PAGE" runat="server"></span>
+                                      <span >/</span>
+                                      <span id="TOTAL_PAGE" runat="server"></span>
+                                  </li>
+                                </ul>
                              <div class="table-container">
-                                 <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10">
-                                    <Columns>
-                                        <asp:BoundField ItemStyle-Width="15px" DataField="num" HeaderText="No"/>
-                                        <asp:hyperlinkfield ItemStyle-Width="20px" datatextfield="menu_id" HeaderText="ID" 
-                                            datanavigateurlfields="menu_id"
-                                            datanavigateurlformatstring="MRA-FE-0022.aspx?menu_id={0}"       
-                                            target="_blank" />
-                                         <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_vn" HeaderText="Menu Name VN" />
-                                         <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_jp" HeaderText="Menu Name JP" />
-                                         <asp:BoundField ItemStyle-Width="150px" DataField="note" HeaderText="Note" />
+                                 <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10">
+                                    <Columns>        
+                                        <asp:BoundField ItemStyle-Width="15px" DataField="del_fg" HeaderText="No" />
+                                        <asp:BoundField ItemStyle-Width="20px" DataField="menu_id" HeaderText="ID" />
+                                        <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_vn" HeaderText="Menu Name" />
+                                        <asp:BoundField ItemStyle-Width="150px" DataField="note" HeaderText="Note" />
                                     </Columns>
-                                </asp:GridView>  
+                                </asp:GridView>                                 
                             </div>
                     </div>
                     </div> <!-- div grid end-->
