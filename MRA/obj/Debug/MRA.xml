@@ -53,6 +53,11 @@ MRA
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="F:MRA.CommonDB.connection">
+ <summary>
+ DBクラスはプレゼンテーション（aspx.vb）からの呼び出しはしないでください
+ </summary>
+</member>
 <member name="F:MRA.MRA_FE_0011._form1">
 <summary>
 form1 control.
@@ -62,14 +67,45 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:MRA.MRA_FE_0011._GridView1">
+<member name="F:MRA.MRA_FE_0011._TXT_ID">
 <summary>
-GridView1 control.
+TXT_ID control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
+</member>
+<member name="F:MRA.MRA_FE_0011._TXT_PW">
+<summary>
+TXT_PW control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA.MRA_FE_0011._BTN_LOGIN">
+<summary>
+BTN_LOGIN control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="M:MRA.MRA_FE_0011.BTN_LOGIN_ServerClick(System.Object,System.EventArgs)">
+ <summary>
+ Button Login 
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:MRA.MRA_FE_0011.CheckIsInputEmpty">
+ <summary>
+ Check null
+ </summary>
+ <returns></returns>
 </member>
 </members>
 </doc>
