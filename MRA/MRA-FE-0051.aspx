@@ -8,13 +8,15 @@
     <link href="css/mrascss.css" rel="stylesheet" media="screen,print" />
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Table List</title>
 </head>
 <body>
-    <form id="form1" runat="server">    
+<form id="form1" runat="server">    
             <!--Header -->
             <div class="header">
-                 <div class="logo"></div><div class="title">Table List</div>
+                 <div class="logo"></div><div class="title">Order List</div>
                 <div class="top-info">
                     
                 </div>
@@ -33,9 +35,9 @@
                                  </div>
                                  <ul class="sub-menu">
                                       <li><a href="MRA-FE-0021.aspx">Menu List</a></li>     
-                                      <li><a href="MRA-FE-0022.aspx">Menu Add</a></li>
+                                      <li><a href="MRA-FE-0022.aspx?menu_id=">Menu Edit</a></li>
                                       <li><a href="MRA-FE-0031.aspx">Product List</a></li>
-                                      <li><a href="MRA-FE-0032.aspx">Product Add</a></li>
+                                      <li><a href="MRA-FE-0032.aspx">Product Edit</a></li>
                                   </ul>
                              </li>
                              <li>
@@ -47,13 +49,12 @@
                                   </div>                                 
                                  <ul class="sub-menu">
                                      <li><a href="MRA-FE-0041.aspx">Orders List</a></li>
-                                     <li><a href="MRA-FE-0042.aspx">Orders Detail</a></li>
+                                     <li><a href="MRA-FE-0042.aspx?table_info_id=">Orders Detail</a></li>
                                      <li><a href="MRA-FE-0051.aspx">Table List</a></li>
                                  </ul>
                               </li>
                         </ul>
                      </div>
-                
                 <!-- Detail Content -->
                  <div class="right-col">
                       <!-- Search area-->
@@ -68,36 +69,41 @@
                      <!--Grid Table-->
                      <div class="div-grid1">
                      <div class="tile is-parent is-vertical">
-                                <button id="PAGE_PREV" runat="server" class="button previous">Previous</button>
-                                <button id="PAGE_NEXT" runat="server" class="button next">Next</button>
-                                <ul>
-                                  <li class="pagedivided">
-                                      <span id="CURRENT_PAGE" runat="server"></span>
-                                      <span >/</span>
-                                      <span id="TOTAL_PAGE" runat="server"></span>
-                                  </li>
-                                </ul>
-                             <div class="table-container">                                 
-                                 <div><button id="BTN_ADD_ROW" runat="server" class="add-row button">Add row</button></div>
-                                    <HeaderTemplate>
-                                        <table class="table" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th class="th" style="width:5%">No</th>
-                                                    <th class="th" style="width:20%">Name</th>
-                                                    <th class="th" style="width:10%">Capacity</th>
-                                                    <th class="th" style="width:40%">Note</th>
-                                                    <th class="th" style="width:20%">Status</th>
-                                                </tr>
-                                            </thead>
-                                                </table>
-                                    </HeaderTemplate>
+                               <div class="table-container"> 
+                        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-info" />
+                                 <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False"
+                                     AllowPaging="True" PageSize="10" class="table table-bordered"
+                                     OnRowEditing="OnRowEditing" OnRowDeleting="OnRowDeleting"
+                                     DataKeyNames="table_id">
+                                    <Columns>        
+                                        <asp:BoundField DataField="num" HeaderText="No" ControlStyle-Width="25px"/>
+                                        <asp:BoundField DataField="table_id" HeaderText="ID" ControlStyle-Width="35px"/>
+                                        <asp:BoundField DataField="table_nm_vn" HeaderText="Name VN" ControlStyle-Width="80px"/>
+                                        <asp:BoundField DataField="table_nm_jp" HeaderText="Name JP" ControlStyle-Width="80px"/>
+                                        <asp:BoundField DataField="capacity" HeaderText="Capacity" ControlStyle-Width="50px"/>
+                                        <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="80px"/>
+                                        <asp:BoundField DataField="description" HeaderText="Note" ControlStyle-Width="120px"/>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton Text="Edit" runat="server" CommandName="Edit" />
+                                            </ItemTemplate>
+                                            <EditItemTemplate>      
+                                                <asp:LinkButton Text="Update" runat="server" OnClick="OnUpdate" />
+                                                <asp:LinkButton Text="Cancel" runat="server" OnClick="OnCancel" />
+                                            </EditItemTemplate>
+                                            </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton Text="Delete" runat="server" CommandName="Delete" />
+                                            </ItemTemplate>                                         
+                                            </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>  
                             </div>
-                    </div>
+                         </div>
                     </div> <!-- div grid end-->
-                        </div> <!-- div right-col end-->
+                 </div> <!-- div right-col end-->
              </div><!-- content-area end -->  
-      
     </form>
     <!-- footer -->
      <footer class="div-footer">

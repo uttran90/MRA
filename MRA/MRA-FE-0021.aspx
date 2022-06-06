@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">    
+<head>    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="css/mrascss.css" rel="stylesheet" media="screen,print" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'/>
     <title>Menu List</title>
@@ -33,9 +35,9 @@
                                  </div>
                                  <ul class="sub-menu">
                                       <li><a href="MRA-FE-0021.aspx">Menu List</a></li>     
-                                      <li><a href="MRA-FE-0022.aspx">Menu Edit</a></li>
+                                      <li><a href="MRA-FE-0022.aspx?menu_id=">Menu Edit</a></li>
                                       <li><a href="MRA-FE-0031.aspx">Product List</a></li>
-                                      <li><a href="MRA-FE-0032.aspx">Product Edit</a></li>
+                                      <li><a href="MRA-FE-0032.aspx?product_id=">Product Edit</a></li>
                                   </ul>
                              </li>
                              <li>
@@ -47,7 +49,7 @@
                                   </div>                                 
                                  <ul class="sub-menu">
                                      <li><a href="MRA-FE-0041.aspx">Orders List</a></li>
-                                     <li><a href="MRA-FE-0042.aspx">Orders Detail</a></li>
+                                     <li><a href="MRA-FE-0042.aspx?table_info_id=">Orders Detail</a></li>
                                      <li><a href="MRA-FE-0051.aspx">Table List</a></li>
                                  </ul>
                               </li>
@@ -68,13 +70,12 @@
                      <div class="div-grid1">
                      <div class="tile is-parent is-vertical">
                              <div class="table-container">
-                                 <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10">
+                                 <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10" class="table table-bordered" >
                                     <Columns>
                                         <asp:BoundField ItemStyle-Width="15px" DataField="num" HeaderText="No"/>
                                         <asp:hyperlinkfield ItemStyle-Width="20px" datatextfield="menu_id" HeaderText="ID" 
                                             datanavigateurlfields="menu_id"
-                                            datanavigateurlformatstring="MRA-FE-0022.aspx?menu_id={0}"       
-                                            target="_blank" />
+                                            datanavigateurlformatstring="MRA-FE-0022.aspx?menu_id={0}"  />
                                          <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_vn" HeaderText="Menu Name VN" />
                                          <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_jp" HeaderText="Menu Name JP" />
                                          <asp:BoundField ItemStyle-Width="150px" DataField="note" HeaderText="Note" />
@@ -94,5 +95,6 @@
     <p>Copyright © 2022 MEO SYSTEM</p>
     </footer>
     <!--End Container -->
+  
 </body>
 </html>
