@@ -1,0 +1,240 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MRA-FE-0022
+</name>
+</assembly>
+<members>
+<member name="T:My.MyWebExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:My.MyWebExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:My.MyWebExtension.User">
+ <summary>
+ Returns information for the current Web user.
+ </summary>
+</member>
+<member name="P:My.MyWebExtension.Request">
+ <summary>
+ Returns Request object.
+ </summary>
+</member>
+<member name="P:My.MyWebExtension.Response">
+ <summary>
+ Returns Response object.
+ </summary>
+</member>
+<member name="P:My.MyWebExtension.Log">
+ <summary>
+ Returns the Asp log object.
+ </summary>
+</member>
+<member name="T:My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="F:MRA_FE_0022._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._IMG_ID">
+<summary>
+IMG_ID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._LBL_MENU_ID">
+<summary>
+LBL_MENU_ID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._TXT_NAME_VN">
+<summary>
+TXT_NAME_VN control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._TXT_NAME_JP">
+<summary>
+TXT_NAME_JP control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._TXT_NOTE">
+<summary>
+TXT_NOTE control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._FILE_PATH">
+<summary>
+FILE_PATH control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._LBL_FILE">
+<summary>
+LBL_FILE control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._BTN_UPLOAD">
+<summary>
+BTN_UPLOAD control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._SELECT_SEND_PRODUCT_LEFT">
+<summary>
+SELECT_SEND_PRODUCT_LEFT control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._BTN_ADD">
+<summary>
+BTN_ADD control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._BTN_UPDATE">
+<summary>
+BTN_UPDATE control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:MRA_FE_0022._BTN_DELETE">
+<summary>
+BTN_DELETE control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="M:MRA_FE_0022.MRA_FE_0022_InitLoad(System.Object,System.EventArgs)">
+ <summary>
+ 初期表示
+ </summary>
+</member>
+<member name="M:MRA_FE_0022.Random_ID">
+ <summary>
+ Create random id in 10 character
+ </summary>
+</member>
+<member name="M:MRA_FE_0022.BTN_ADD_Click(System.Object,System.EventArgs)">
+ <summary>
+ Add
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:MRA_FE_0022.BTN_Update_Click(System.Object,System.EventArgs)">
+ <summary>
+ Update
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:MRA_FE_0022.BTN_DELETE_Click(System.Object,System.EventArgs)">
+ <summary>
+ Update
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:MRA_FE_0022.SetStateInfo">
+ <summary>
+ 状態設定
+ </summary>
+</member>
+<member name="M:MenuDetail_BL.GetMenuInfo(System.String@)">
+ <summary>
+ GetListProduct
+ </summary>
+ <returns>DataTable</returns>
+</member>
+<member name="M:MenuDetail_BL.GetListProduct">
+ <summary>
+ GetListProduct
+ </summary>
+ <returns>DataTable</returns>
+</member>
+<member name="M:MenuDetail_BL.GetListChosenProduct(System.String@)">
+ <summary>
+ GetListChosenProduct
+ </summary>
+ <returns>DataTable</returns>
+</member>
+<member name="M:MenuDetail_BL.GetListIdProduct(System.String@)">
+ <summary>
+ GetListIdProduct
+ </summary>
+ <returns>DataTable</returns>
+</member>
+<member name="M:MenuDetail_BL.getSeq(System.String)">
+ <summary>
+ seq_m_menu
+ </summary>
+ <returns>seq_m_menu.NEXTVAL</returns>
+</member>
+</members>
+</doc>

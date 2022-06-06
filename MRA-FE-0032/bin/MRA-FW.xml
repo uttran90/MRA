@@ -1,0 +1,63 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MRA-FW
+</name>
+</assembly>
+<members>
+<member name="T:MRA_FW.My.MyWebExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MRA_FW.My.MyWebExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:MRA_FW.My.MyWebExtension.User">
+ <summary>
+ Returns information for the current Web user.
+ </summary>
+</member>
+<member name="P:MRA_FW.My.MyWebExtension.Request">
+ <summary>
+ Returns Request object.
+ </summary>
+</member>
+<member name="P:MRA_FW.My.MyWebExtension.Response">
+ <summary>
+ Returns Response object.
+ </summary>
+</member>
+<member name="P:MRA_FW.My.MyWebExtension.Log">
+ <summary>
+ Returns the Asp log object.
+ </summary>
+</member>
+<member name="F:MRA_FW.BasePL.State.Init">
+ <summary>
+ 初期表示状態
+ ヘッダ項目がある場合はヘッダ入力可、ボディ入力不可
+ </summary>
+</member>
+<member name="F:MRA_FW.BasePL.State.Enter">
+ <summary>
+ ボディ入力可能状態
+ </summary>
+ 
+</member>
+<member name="F:MRA_FW.BasePL.State.Check">
+ <summary>
+ 実行確認状態
+ </summary>
+</member>
+<member name="F:MRA_FW.BasePL.PageState">
+ <summary>
+ 画面状態判定
+ </summary>
+</member>
+</members>
+</doc>
