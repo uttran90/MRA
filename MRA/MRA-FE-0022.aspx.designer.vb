@@ -23,31 +23,85 @@ Partial Public Class MRA_FE_0022
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''DDL_MENU_NM control.
+    '''IMG_ID control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DDL_MENU_NM As Global.System.Web.UI.HtmlControls.HtmlSelect
+    Protected WithEvents IMG_ID As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
-    '''TXT_PRODUCT_LIST control.
+    '''LBL_MENU_ID control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TXT_PRODUCT_LIST As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents LBL_MENU_ID As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''TXT_PRODUCT_CHOSEN control.
+    '''TXT_NAME_VN control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TXT_PRODUCT_CHOSEN As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents TXT_NAME_VN As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''TXT_NAME_JP control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TXT_NAME_JP As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''TXT_NOTE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TXT_NOTE As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''FILE_PATH control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FILE_PATH As Global.System.Web.UI.WebControls.FileUpload
+
+    '''<summary>
+    '''LBL_FILE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LBL_FILE As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''BTN_UPLOAD control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_UPLOAD As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''SELECT_SEND_PRODUCT_LEFT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SELECT_SEND_PRODUCT_LEFT As Global.System.Web.UI.WebControls.ListBox
 
     '''<summary>
     '''BTN_ADD control.
@@ -56,7 +110,7 @@ Partial Public Class MRA_FE_0022
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents BTN_ADD As Global.System.Web.UI.HtmlControls.HtmlButton
+    Protected WithEvents BTN_ADD As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''BTN_UPDATE control.
@@ -65,7 +119,7 @@ Partial Public Class MRA_FE_0022
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents BTN_UPDATE As Global.System.Web.UI.HtmlControls.HtmlButton
+    Protected WithEvents BTN_UPDATE As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''BTN_DELETE control.
@@ -74,5 +128,5 @@ Partial Public Class MRA_FE_0022
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents BTN_DELETE As Global.System.Web.UI.HtmlControls.HtmlButton
+    Protected WithEvents BTN_DELETE As Global.System.Web.UI.WebControls.Button
 End Class
