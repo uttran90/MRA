@@ -73,7 +73,7 @@ body {
         margin-top: 115px;
     }
 .date {
-    width: 135px;
+    width: 180px;
     height: 28px;
     border-radius: 4px;
     border: 1px solid #645e5e;
@@ -81,7 +81,7 @@ body {
     font-size: 18px;
 }
 .hour {
-    width: 110px;
+    width: 80px;
     height: 28px;
     border-radius: 4px;
     border: 1px solid #645e5e;
@@ -127,7 +127,7 @@ body {
 }
 .left-col {
     float: left;
-    width: 220px; 
+    width: 200px; 
     height: 700px;
     border: 1px solid #c7c7c7;
     position:fixed;
@@ -240,7 +240,7 @@ body {
 .search-content-m .lbl1 {
             margin-top: 6px;
             left: 220px;
-            width:110px;
+            width:120px;
             position: fixed;
         }
     .search-content-m .btn1 {
@@ -269,7 +269,7 @@ body {
                 border-radius:4px;
             }
 .div-grid1 {
-    width: 1000px;
+    width: 800px;
     height: 610px;
     border: 1px solid #c7c7c7;
     border-radius: 4px;
@@ -278,7 +278,7 @@ body {
     position: absolute;
 }
 .div-grid2 {
-    width: 850px;
+    width: 800px;
     height: 550px;
     border: 1px solid #c7c7c7;
     border-radius: 6px;
@@ -287,7 +287,7 @@ body {
     position: absolute;
 }
 .div-grid3 {
-    width: 850px;
+    width: 800px;
     height: 550px;
     border: 1px solid #c7c7c7;
     border-radius: 6px;
@@ -428,10 +428,10 @@ body {
     padding:0.25rem 0.25rem;
 }
 .button-end-center {
-    width: 300px;
+    width: 350px;
     height: 50px;
     border-radius: 4px;
-    margin:8px 0 0 250px;
+    margin:8px 0 0 150px;
     position: fixed;
 }
 .head {
@@ -448,8 +448,8 @@ body {
     border: 1px solid #c7c7c7;
 }
 .add-row {
-    width: 80px;
-    height: 30px;
+    width: 60px;
+    height: 20px;
     padding:2px 2px;
 }
 .sum {
@@ -470,14 +470,6 @@ body {
     .sum .lable-r {
         float: right;
     }
-.csv-btn {
-    background: green;
-    color: aliceblue;
-    width: 100px;
-    margin-left: 20px;
-    border-radius: 4px;
-    border: none;
-}
 .td {
     color:#000000;
     border:1px solid #c7c7c7;

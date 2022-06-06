@@ -23,13 +23,13 @@ Partial Public Class MRA_FE_0041
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''TXT_SEARCH control.
+    '''TXT_ORDER control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TXT_SEARCH As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents TXT_ORDER As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
     '''BTN_SEARCH control.
@@ -50,11 +50,38 @@ Partial Public Class MRA_FE_0041
     Protected WithEvents BTN_CSV As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
-    '''GRD_DATA control.
+    '''PAGE_PREV control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents GRD_DATA As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents PAGE_PREV As Global.System.Web.UI.HtmlControls.HtmlButton
+
+    '''<summary>
+    '''PAGE_NEXT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PAGE_NEXT As Global.System.Web.UI.HtmlControls.HtmlButton
+
+    '''<summary>
+    '''CURRENT_PAGE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CURRENT_PAGE As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''TOTAL_PAGE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TOTAL_PAGE As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

@@ -15,7 +15,7 @@
     <title>Menu Add/ Update</title>
 </head>
 <body>
-    <form id="form1" runat="server" method="post" >   
+    <form id="form1" runat="server" method="post">    
             <!--Header -->
             <div class="header">
                  <div class="logo"></div>
@@ -99,9 +99,7 @@
                               <div class="field hi-25">
                                     <!-- Menu image -->
                                      <asp:label for="FILE_PATH" runat="server" ID="LBL_FILE" style="margin-left:125px; max-width:150px;max-height:25px;"></asp:label>
-                                     <asp:Button class="button" style="margin-left:200px;position:fixed;" 
-                                          id="BTN_UPLOAD" Text="Upload" runat="server" OnClick="UPLOAD_Click" 
-                                         OnClientClick="javascript:document.getElementById('IMG_ID').style.display = 'block';"/>
+                                     <asp:Button class="button" style="margin-left:200px;position:relative;" id="BTN_UPLOAD" Text="Upload" runat="server" OnClick="UPLOAD_Click"/>
                                 </div> 
                                 <div class="field hi-25">
                                   <label class="col-l lable-c" id="LBL_PRODUCT">Products</label> 
@@ -197,5 +195,5 @@
         }
         profilePic.addEventListener('change', changeLabelText, false); /* runs the function whenever the filename in the input is changed */
     </script>
-    </body>
+</body>
 </html>

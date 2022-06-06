@@ -41,74 +41,47 @@ Partial Public Class MRA_FE_0051
     Protected WithEvents BTN_SEARCH As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
-    '''lblstudent control.
+    '''PAGE_PREV control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblstudent As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents PAGE_PREV As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
-    '''lblstudentid control.
+    '''PAGE_NEXT control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblstudentid As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents PAGE_NEXT As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
-    '''Label1 control.
+    '''CURRENT_PAGE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents CURRENT_PAGE As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''lblmonth control.
+    '''TOTAL_PAGE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblmonth As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents TOTAL_PAGE As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''lblAmount control.
+    '''BTN_ADD_ROW control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblAmount As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''txtAmount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtAmount As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''btnSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''GRD_DATA control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents GRD_DATA As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents BTN_ADD_ROW As Global.System.Web.UI.HtmlControls.HtmlButton
 End Class
