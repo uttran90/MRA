@@ -10,6 +10,9 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>Table List</title>
 </head>
 <body>
@@ -70,18 +73,51 @@
                      <div class="div-grid1">
                      <div class="tile is-parent is-vertical">
                                <div class="table-container"> 
-                        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-info" />
+                                   <div> <!-- div add row-->                             
+                                        <button id="BTN_ADD_ROW" runat="server" class="add-row button">Add row</button>
+                                         <div class="modal fade" id="addModalDates" tabindex="-1" role="dialog" aria-labelledby="addModalDates" style="position: absolute" data-backdrop="false" data-keyboard="false">
+                                            <div class="modal-dialog" role="document" style="width: 600px;">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                         <label style="font-weight: bold; display: block;">Table Content Add</label>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div style="margin-top: 10px;">
+                                                            <label style="font-weight: bold; display: block;">Name VN</label>
+                                                            <asp:TextBox runat="server" ID="TXT_VN"></asp:TextBox>
+                                                        </div>
+                                                        <div style="margin-top: 10px;">
+                                                            <label style="font-weight: bold; display: block;">Name JP </label>
+                                                            <asp:TextBox runat="server" ID="TXT_JP"></asp:TextBox>
+                                                        </div>
+                                                        <div style="margin-top: 10px;">
+                                                            <label style="font-weight: bold; display: block;">Capacity</label>
+                                                            <asp:TextBox runat="server" ID="TXT_CAP"></asp:TextBox>
+                                                        </div>
+                                                        <div style="margin-top: 10px;">
+                                                            <label style="font-weight: bold; display: block;">Note </label>
+                                                            <asp:TextBox runat="server" ID="TXT_NOTE"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <asp:Button runat="server" ID="BTN_SAVE" class="btn btn-success" Text="Save"></asp:Button>
+                                                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>                                                       
+                                                     </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div> <!-- div add row end-->   
                                  <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False"
                                      AllowPaging="True" PageSize="10" class="table table-bordered"
                                      OnRowEditing="OnRowEditing" OnRowDeleting="OnRowDeleting"
                                      DataKeyNames="table_id">
                                     <Columns>        
-                                        <asp:BoundField DataField="num" HeaderText="No" ControlStyle-Width="25px"/>
-                                        <asp:BoundField DataField="table_id" HeaderText="ID" ControlStyle-Width="35px"/>
+                                        <asp:BoundField DataField="num" HeaderText="No" ControlStyle-Width="25px" ReadOnly="true"/>
+                                        <asp:BoundField DataField="table_id" HeaderText="ID" ControlStyle-Width="35px" ReadOnly="true"/>
                                         <asp:BoundField DataField="table_nm_vn" HeaderText="Name VN" ControlStyle-Width="80px"/>
                                         <asp:BoundField DataField="table_nm_jp" HeaderText="Name JP" ControlStyle-Width="80px"/>
                                         <asp:BoundField DataField="capacity" HeaderText="Capacity" ControlStyle-Width="50px"/>
-                                        <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="80px"/>
+                                        <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="80px" ReadOnly="true"/>
                                         <asp:BoundField DataField="description" HeaderText="Note" ControlStyle-Width="120px"/>
                                         <asp:TemplateField>
                                             <ItemTemplate>
@@ -100,10 +136,11 @@
                                     </Columns>
                                 </asp:GridView>  
                             </div>
-                         </div>
+                    </div>
                     </div> <!-- div grid end-->
-                 </div> <!-- div right-col end-->
+                        </div> <!-- div right-col end-->
              </div><!-- content-area end -->  
+      
     </form>
     <!-- footer -->
      <footer class="div-footer">
