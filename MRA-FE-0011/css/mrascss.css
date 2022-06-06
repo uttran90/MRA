@@ -488,3 +488,12 @@ table tbody tr th {
     color: white;
     text-align: center;
 }
+
+table tbody tr td table tbody tr td {
+    background-color: #26b994d9;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    color: white;
+    border: solid 1px;
+}
