@@ -10,7 +10,6 @@ Public Class MRA_FE_0051
     '''' <param name="sender"></param>
     '''' <param name="e"></param>
     Private Sub MRA_FE_0051_InitLoad(sender As Object, e As EventArgs) Handles Me.Load
-
         Try
             If Not IsPostBack Then
                 GRD_DATA.DataSource = BL.Load()
@@ -53,7 +52,7 @@ Public Class MRA_FE_0051
         CommonDB.BeginTransaction()
         If IsPostBack Then
             Try
-                Dim table_id As String = TryCast(row.Cells(1).Controls(0), TextBox).Text
+                Dim table_id As String = row.Cells(1).Text
                 Dim nameVN As String = TryCast(row.Cells(2).Controls(0), TextBox).Text
                 Dim nameJP As String = TryCast(row.Cells(3).Controls(0), TextBox).Text
                 Dim capacity As String = TryCast(row.Cells(4).Controls(0), TextBox).Text
@@ -114,9 +113,57 @@ Public Class MRA_FE_0051
     '--------update delete edit cancel row end---------
     '--------add row start---------
     Private Sub BTN_ADD_ROW_ServerClick(sender As Object, e As EventArgs) Handles BTN_ADD_ROW.ServerClick
-       
+        ScriptManager.RegisterStartupScript(Me.Page, Page.GetType(), "MyScript", "$('#addModalDates').modal('show');", True)
     End Sub
-
+    Private Sub BTN_SAVE_Click(sender As Object, e As EventArgs) Handles BTN_SAVE.Click
+        Dim CommonDB As CommonDB = New CommonDB
+        CommonDB.BeginTransaction()
+        Try
+            Dim sql As String = ""
+            sql = ""
+            sql &= "INSERT INTO m_table_list"
+            sql &= "("
+            sql &= "table_nm_vn"
+            sql &= ",table_nm_en"
+            sql &= ",table_nm_jp"
+            sql &= ",sort_no"
+            sql &= ",table_ava"
+            sql &= ",capacity"
+            sql &= ",description"
+            sql &= ",crt_dt"
+            sql &= ",crt_user_id"
+            sql &= ",crt_pgm_id"
+            sql &= ",upd_dt"
+            sql &= ",upd_user_id"
+            sql &= ",upd_pgm_id"
+            sql &= ",del_fg"
+            sql &= ")"
+            sql &= "VALUES"
+            sql &= " (" & CommonDB.EncloseVal(TXT_VN.Text)
+            sql &= " ,''"
+            sql &= " ," & CommonDB.EncloseVal(TXT_JP.Text)
+            sql &= " ,''"
+            sql &= " ,'table1.png'"
+            sql &= " ," & CommonDB.EncloseVal(TXT_CAP.Text)
+            sql &= " ," & CommonDB.EncloseVal(TXT_NOTE.Text)
+            sql &= " ," & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sql &= " ,'admin'"
+            sql &= " ,'MRA-FE-0051'"
+            sql &= " ,''"
+            sql &= " ,''"
+            sql &= " ,''"
+            sql &= " ,'0'"
+            sql &= ")"
+            If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
+                CommonDB.Rollback()
+            End If
+            CommonDB.Commit()
+            MsgBox("Insert OK")
+            Response.Redirect("~/MRA-FE-0051.aspx", False)
+        Catch ex As Exception
+            MsgBox("Insert except", ex.Message)
+        End Try
+    End Sub
     '--------add row end---------
     'ShowData method for Displaying Data in Gridview
     Private Sub showData()
@@ -134,6 +181,4 @@ Public Class MRA_FE_0051
             MsgBox("system err")
         End Try
     End Sub
-
-
 End Class
