@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports MRA.CommonUtil
 Imports MRA.PageData
+Imports MRA.BasePL
 Public Class MenuDetail_BL
     Public CommonDB As CommonDB
     Public CommonUtil As CommonUtil
@@ -63,8 +64,8 @@ Public Class MenuDetail_BL
         Dim sql As String
         Try
             sql = ""
-            sql &= " select md.product_id"
-            sql &= "       ,md.product_nm_vn"
+            sql &= " select md.product_id    as product_id"
+            sql &= "       ,md.product_nm_vn as product_nm_vn"
             sql &= " from   m_menu mm"
             sql &= "       ,m_product md"
             sql &= " where  mm.del_fg <> '1' "
@@ -81,6 +82,27 @@ Public Class MenuDetail_BL
             Throw ex
         End Try
     End Function
+    ''' <summary>
+    ''' GetListIdProduct
+    ''' </summary>
+    ''' <returns>DataTable</returns>
+    Public Function GetListIdProduct(ByRef strProductNm As String) As DataTable
+        Dim dt As New DataTable
+        Dim sql As String
+        Try
+            sql = ""
+            sql &= " select md.product_id    as product_id"
+            sql &= " from   m_product md"
+            sql &= " where  md.del_fg <> '1'"
+            If String.IsNullOrEmpty(strProductNm) = False OrElse String.IsNullOrWhiteSpace(strProductNm) = False Then
+                sql &= "    and md.product_nm = '" & strProductNm & "'"
+            End If
+            dt = CommonDB.ExecuteFill(sql)
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
     '''' <summary>
     '''' BtnConfirmInUp
     '''' </summary>
@@ -88,7 +110,7 @@ Public Class MenuDetail_BL
     'Public Function BtnConfirm(ByRef pd As PageData) As Boolean
 
     '    Dim sql As String = ""
-
+    '    Dim sql1 As String = ""
     '    CommonDB.BeginTransaction()
     '    Try
     '        Dim strShoriMode As String = pd.GetItem(CommonUtil.SHORI_MODE)
@@ -161,20 +183,22 @@ Public Class MenuDetail_BL
     '        Throw ex
     '    End Try
     'End Function
-    '''' <summary>
-    '''' seq_m_menu
-    '''' </summary>
-    '''' <returns>seq_m_menu.NEXTVAL</returns>
-    'Public Function GetMenuIdFromSeq() As String
-    '    Dim sql As String
-    '    Try
-    '        sql = ""
-    '        sql &= " SELECT SELECT count(LAST_INSERT_ID() ) + 1 as menu_id"
-    '        sql &= " FROM   m_menu"
-    '        Return CommonDB.ExecuteScalar(sql)
-    '    Catch ex As Exception
-    '        Throw ex
-    '    End Try
-    'End Function
+    ''' <summary>
+    ''' seq_m_menu
+    ''' </summary>
+    ''' <returns>seq_m_menu.NEXTVAL</returns>
+    Public Function getSeq(tbl As String) As Integer
+        Dim sqll As String
+        Try
+            sqll = ""
+            sqll &= " SELECT AUTO_INCREMENT -1 "
+            sqll &= " FROM   information_schema.tables"
+            sqll &= " WHERE table_name   = " & CommonDB.EncloseVal(tbl)
+            sqll &= "   and table_schema = 'meo09965_MR'"
+            Return CommonDB.ExecuteScalar(sqll)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 End Class
 
