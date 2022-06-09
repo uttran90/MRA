@@ -4,7 +4,9 @@ Public Class MRA_FE_0021
     Inherits System.Web.UI.Page
 
     Public BL As New Menu_BL
-
+    Private Sub MRA_FE_0021_Unload(sender As Object, e As EventArgs) Handles Me.Unload
+        BL.Dispose()
+    End Sub
     '''' <summary>
     '''' initload
     '''' </summary>

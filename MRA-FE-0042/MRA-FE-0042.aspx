@@ -59,33 +59,38 @@
                 <!-- Detail Content -->
                  <div class="right-col" >
                       <!-- Search area-->
-                      <div class="div-search1">
+                      <div class="div-search2">
                           <div class="search-content-m pad-25">
                                <!--Search by order -->
                                  <label class="lbl1" style="width:10%;margin-top:18px;" id="LBL_ORDER" >Order ID</label>
                                  <asp:TextBox class="ip-search top bo" style="width:50%;margin:10px 0 0 90px;" id="TXT_SEARCH"  type="text" runat="server"/>     
-                              <button id="BTN_SEARCH" class="button" runat="server">
-                                       <span>Search</span>
-                                     </button>
-                          </div>                     
+                              <button id="BTN_SEARCH" class="button" runat="server"><span>Search</span></button>        
+                          </div>     
+                           <div class="search-content-m pad-25">
+                               <!--Search by order -->
+                                 <label class="lbl1" style="width:10%;margin-top:18px;" id="LBL_DATE" >Date</label>
+                                  <asp:TextBox class="top bo" style="width:50%;margin:10px 0 0 90px;background-color:#c7c7c7" id="TXT_DATE"  type="text" runat="server" ReadOnly="true"/>    
+                          </div> 
                         </div>  
                       <!--Grid Table-->
-                     <div class="div-grid1">
+                     <div class="div-grid2">
                          <div class="tile is-parent is-vertical">
                              <div class="table-container">
-                                   <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10" class="table table-bordered" OnRowEditing="OnRowEditing">
+                                <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10" 
+                                       class="table table-bordered" OnRowEditing="OnRowEditing" OnRowDeleting="OnRowDeleting"
+                                       DataKeyNames="table_order_id">
                                     <Columns>
-                                        <asp:BoundField DataField="num" HeaderText="No" ControlStyle-Width="25px"/>
-                                        <asp:BoundField DataField="product_id" HeaderText="Product ID" ControlStyle-Width="80px"/>
-                                        <asp:BoundField DataField="product_nm_vn" HeaderText="Product" ControlStyle-Width="80px"/>
-                                        <asp:BoundField DataField="product_count" HeaderText="Count" ControlStyle-Width="40px"/>
-                                        <asp:BoundField DataField="price" HeaderText="Price"  DataFormatString="{0:N2}" ControlStyle-Width="50px"/>
-                                        <asp:BoundField DataField="product_opt_nm" HeaderText="Option" ControlStyle-Width="80px"/>
-                                        <asp:BoundField DataField="product_opt_count" HeaderText="Option Count" ControlStyle-Width="40px"/>
-                                        <asp:BoundField DataField="product_opt_price" HeaderText="Option Price" ControlStyle-Width="50px"/>
-                                        <asp:BoundField DataField="serve_date" HeaderText="Date" ControlStyle-Width="90px"/>
-                                        <asp:BoundField DataField="table_nm_vn" HeaderText="Table" ControlStyle-Width="80px"/>
-                                        <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="50px"/>
+                                        <asp:BoundField DataField="num" HeaderText="No" ControlStyle-Width="25px" ReadOnly ="true"/>
+                                        <asp:BoundField DataField="table_order_id" HeaderText="Table Order ID" ControlStyle-Width="30px" ReadOnly ="true"/>
+                                        <asp:BoundField DataField="product_id" HeaderText="Product ID" ControlStyle-Width="30px"/>
+                                        <asp:BoundField DataField="product_nm_vn" HeaderText="Product" ControlStyle-Width="80px" ReadOnly ="true"/>
+                                        <asp:BoundField DataField="product_count" HeaderText="Count" ControlStyle-Width="30px"/>
+                                        <asp:BoundField DataField="price" HeaderText="Price"  DataFormatString="{0:N2}" ControlStyle-Width="50px" ReadOnly ="true"/>
+                                        <asp:BoundField DataField="product_opt_id" HeaderText="Option ID" ControlStyle-Width="80px"/>
+                                        <asp:BoundField DataField="product_opt_nm" HeaderText="Option" ControlStyle-Width="80px" ReadOnly ="true"/>
+                                        <asp:BoundField DataField="product_opt_count" HeaderText="Option Count" ControlStyle-Width="30px"/>
+                                        <asp:BoundField DataField="product_opt_price" HeaderText="Option Price" ControlStyle-Width="50px" ReadOnly ="true"/>
+                                        <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="50px" ReadOnly="true"/>
                                         <asp:BoundField DataField="note_tx" HeaderText="Note" ControlStyle-Width="80px"/>
                                         <asp:TemplateField>
                                             <ItemTemplate>
@@ -94,12 +99,17 @@
                                             <EditItemTemplate>      
                                                 <asp:LinkButton Text="Update" runat="server" OnClick="Update" />
                                                 <asp:LinkButton Text="Cancel" runat="server" OnClick="Cancel" />
-                                            </EditItemTemplate>
-                                            </asp:TemplateField>
+                                            </EditItemTemplate> 
+                                         </asp:TemplateField>
+                                         <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton Text="Delete" runat="server" CommandName="Delete" />
+                                         </ItemTemplate>                                         
+                                        </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>  
-                            </div>
-                             </div>
+                            </div><!--div table-container end-->
+                       </div>
                    </div> <!-- div grid end--> 
                  </div> <!-- div right-col end-->
              </div><!-- content-area end -->  

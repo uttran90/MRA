@@ -6,6 +6,9 @@ Public Class Menu_BL
         MyBase.New
         CommonDB = New CommonDB
     End Sub
+    Public Sub Dispose()
+        CommonDB.Dispose()
+    End Sub
     ''' <summary>
     ''' GET LIST
     ''' </summary>
@@ -25,6 +28,9 @@ Public Class Menu_BL
             sql &= " where  mm.del_fg <> '1' "
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
                 sql &= "    and mm.menu_nm_vn like '%" & strSearch & "%'"
+            End If
+            If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
+                sql &= "    or mm.menu_nm_en like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
                 sql &= "    or mm.menu_nm_jp like '%" & strSearch & "%'"

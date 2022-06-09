@@ -62,10 +62,8 @@
                  <div class="right-col" >
                      <div class="div-field">
                          <div class="image">
-
                              <asp:Image ID="IMG_ID" runat="server" Height="146px" Width="146px" />
-
-                         </div>
+                          </div>
                           <div class="content" style="height:620px;">   
                                <div class="field hi-25">
                                     <!-- Menu id -->
@@ -93,16 +91,14 @@
                                 </div> 
                                 <div class="field hi-25">
                                     <!-- Menu image -->
-                                     <label class="col-l lable-c" id="LBL_IMAGE" >Image</label> 
-                                    <asp:FileUpload id="FILE_PATH" runat="server" style="margin-left:20px;" accept="image/png, image/jpeg"/>
+                                    <div class="col-l"><label class="lable-c" id="LBL_IMAGE" >Image</label> </div>
+                                   <div class="choose-image">
+                                       <label for="TXT_FILEPATH" id="LBL_FILEPATH" runat="server" class="image-input" >Click to choose image</label>
+                                      <input name='upload' type="file" id="TXT_FILEPATH" runat="server" style="display:none;"/>
+                                       <asp:Button class="button" style="position:absolute;margin-left:20px;" id="BTN_UPLOAD" Text="Upload" runat="server" OnClick="UPLOAD_Click" />
+                                    </div>
                                 </div> 
-                              <div class="field hi-25">
-                                    <!-- Menu image -->
-                                     <asp:label for="FILE_PATH" runat="server" ID="LBL_FILE" style="margin-left:125px; max-width:150px;max-height:25px;"></asp:label>
-                                     <asp:Button class="button" style="margin-left:200px;position:fixed;" 
-                                          id="BTN_UPLOAD" Text="Upload" runat="server" OnClick="UPLOAD_Click" 
-                                         OnClientClick="javascript:document.getElementById('IMG_ID').style.display = 'block';"/>
-                                </div> 
+                              
                                 <div class="field hi-25">
                                   <label class="col-l lable-c" id="LBL_PRODUCT">Products</label> 
                                   <label class="col-l lable-c" style="margin-left:20px;" >Product list</label> 
@@ -129,6 +125,7 @@
                     </div><!-- div field end-->
                  </div> <!-- div right-col end-->
              </div> <!-- content-area end --> 
+        <input type="text" id="TXT_PATH" runat="server" style="display:none;"/>
         <script type="text/javascript">
             $(function () {
                 // マルチセレクトボックス化
@@ -168,6 +165,15 @@
 
                 });
             });
+                $('#TXT_FILEPATH').change(function () {
+            var file = $('#TXT_FILEPATH')[0].files[0];
+                if (file != null) {
+                    $(this).prev('label').text(file.name);
+            }
+                else {
+                    $(this).prev('label').text("");
+            }
+        });
         </script>
          <!-- ############ /javascript  ############ -->
          <!-- ############  style  ############ -->

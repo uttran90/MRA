@@ -182,7 +182,7 @@ body {
     background-color: #fff;
     margin-left: 200px;
     padding: 0px, 10px;
-    position: fixed;
+    position: absolute;
 }
 
 .div-footer {
@@ -206,7 +206,7 @@ body {
 /*2 row in search*/
 .div-search2 {
     width: 600px;
-    height: 80px;
+    height: 110px;
     border: 1px solid #c7c7c7;
     border-radius: 6px;
     margin-left: 2px;
@@ -262,7 +262,7 @@ body {
                 border-radius:4px;
             }
 .div-grid1 {
-    width:100%;
+    width: 100%;
     height: 610px;
     border: 1px solid #c7c7c7;
     border-radius: 4px;
@@ -287,23 +287,7 @@ body {
     margin-left: 2px;
     margin-top: 145px;
     position: absolute;
-    float: left;
-}
-.previous {
-        float: left;
-        padding: 1px 1px 0 0;
-        margin-left: 2px;
-        border-radius:4px;
-    }
-.next {
-        float: right;
-        margin-right: 2px;
-        border-radius: 4px;
-    }
-.pagedivided {
-        list-style: none;
-        text-align:center;
-    width: 576px;
+    float:left;
 }
 .tile.is-parent {
     padding: .5rem;
@@ -311,16 +295,6 @@ body {
 
 .tile.is-vertical {
     flex-direction: column;
-}
-.pagination {
-    font-size: 1rem;
-    margin: -.25rem;
-}
-.pagination, .pagination-list {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    text-align: center;
 }
 .table {
             border-collapse: collapse;
@@ -356,28 +330,30 @@ body {
     }
 /*32*/
 .div-field {
-    width: 800px;
-    height: 670px;
+    width: 1100px;
+    height: 680px;
     border: 1px solid #c7c7c7;
     border-radius: 4px;
     margin-left: 2px;
     margin-top: 2px;
-    padding:0.75rem;
+    padding:0.25rem;
 }
 .content {
-        width: 630px;
+        width: 610px;
         border: 1px solid #c7c7c7;
         border-radius: 4px;
  }
 .field {
     margin: 2px 0 0 2px;
     padding:0.5rem;
+    align-items:center;
 }
     .field .col-l {
         float: left;
         width:18%;
         margin:10px 0 0 3px;
     }
+
 .lable-c {
         height: 30px;
         width: 80px;
@@ -420,12 +396,13 @@ body {
     background:#c7c7c7;
     padding:0.25rem 0.25rem;
 }
+
 .button-end-center {
     width: 300px;
     height: 50px;
     border-radius: 4px;
-    margin:8px 0 0 250px;
-    position: fixed;
+    margin:8px 0 0 230px;
+    position: absolute;
 }
 .head {
     width: 800px;
@@ -488,7 +465,6 @@ table tbody tr th {
     color: white;
     text-align: center;
 }
-
 table tbody tr td table tbody tr td {
     background-color: #26b994d9;
     width: 30px;
@@ -496,4 +472,27 @@ table tbody tr td table tbody tr td {
     text-align: center;
     color: white;
     border: solid 1px;
+}
+.opt-list {
+    width: 480px;
+    border-radius: 2px;
+    border: 1px solid #c7c7c7;
+    margin-top: 160px;
+    margin-left: 612px;
+    position: absolute;
+}
+required_mark {
+    color: red;
+}
+.field .image-input {
+    background-color: #c7c7c7;
+    border-color: #cac7c7;
+    border-radius: 4px;
+    color: #363636;
+    width: 200px;
+    height: 30px;
+}
+.choose-image {
+    margin-left: 120px;
+    width: 200px;
 }

@@ -7,6 +7,9 @@ Public Class MenuDetail_BL
         MyBase.New
         CommonDB = New CommonDB
     End Sub
+    Public Sub Dispose()
+        CommonDB.Dispose()
+    End Sub
     ''' <summary>
     ''' GetListProduct
     ''' </summary>
@@ -70,7 +73,7 @@ Public Class MenuDetail_BL
             sql &= "    and md.del_fg <> '1'"
             sql &= "    and mm.menu_id = md.menu_id"
             If String.IsNullOrEmpty(strMenuId) = False OrElse String.IsNullOrWhiteSpace(strMenuId) = False Then
-                sql &= "    and mm.menu_id = '" & strMenuId & "'"
+                sql &= "    and mm.menu_id = " & strMenuId
             End If
             sql &= "    and  md.product_stt_id <> '1'"
             sql &= " order  by mm.menu_id asc"

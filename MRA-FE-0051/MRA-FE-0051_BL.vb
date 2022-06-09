@@ -1,11 +1,13 @@
-﻿Imports MySql.Data.MySqlClient
-Imports MRACommon
+﻿Imports MRACommon
 
 Public Class Table_BL
     Public CommonDB As CommonDB
     Public Sub New()
         MyBase.New
         CommonDB = New CommonDB
+    End Sub
+    Public Sub Dispose()
+        CommonDB.Dispose()
     End Sub
     ''' <summary>
     ''' GET LIST
