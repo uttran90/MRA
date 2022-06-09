@@ -67,56 +67,44 @@
                              <asp:Image ID="IMG_ID" runat="server" Height="146px" Width="146px" />
                           </div>
                           <div class="content" style="height:620px;">   
-                               <div class="field hi-25">
-                                    <!-- Menu id -->
-                                    <label class="col-l lable-c" id="LBL_ID" >Menu ID</label>
-                                   <asp:label class="col-l lable-c" id="LBL_MENU_ID" style="margin-left:20px;" runat="server" ></asp:label> 
-                                </div>
-                               <div class="field hi-25">
-                                    <!-- Menu name -->
+                                 <div class="field">                                    
+                                   <label class="col-l lable-c" id="LBL_ID" >Menu ID</label>
+                                   <asp:label id="LBL_MENU_ID" style="margin-left:15px;width:50px;align-content:center;" runat="server" ></asp:label>  
+                                 </div><!-- Menu id -->
+                                 <div class="field">                                    
                                     <label class="col-l lable-c" id="LBL_NAME_VN" >Menu name VN</label>
-                                   <asp:TextBox  class="input-c2" id="TXT_NAME_VN" type="text" runat="server"/>
-                                </div>
-                                 <div class="field hi-25">
-                                    <!-- Menu name -->
+                                    <asp:TextBox  class="input-c2" id="TXT_NAME_VN" type="text" runat="server" style="margin-left:15px;"/>
+                                 </div><!-- Menu name -->
+                                 <div class="field">
                                     <label class="col-l lable-c" id="LBL_NAME_JP" >Menu name JP</label>
-                                   <asp:TextBox  class="input-c2" id="TXT_NAME_JP" type="text" runat="server"/>
-                                </div>
+                                   <asp:TextBox  class="input-c2" id="TXT_NAME_JP" type="text" runat="server" style="margin-left:15px;"/>
+                                 </div>
                                 <!--<div class="field hi-25">
                                      <label class="col-l lable-c"  id="LBL_PRODUCT_COUNT" >Product count</label>                                
                                      <label class="col-l lable-c" style="margin-left:20px;" id="LBL_PRODUCT_COUNT_SHOW" >5</label>
                                 </div>-->
-                                <div class="field hi-25">
+                                <div class="field">
                                     <!-- Product Note -->
                                      <label class="col-l lable-c" id="LBL_NOTE" >Note</label> 
-                                    <asp:TextBox class="input-c2" id="TXT_NOTE" type="text" runat="server"/>
+                                    <asp:TextBox class="input-c2" id="TXT_NOTE" type="text" runat="server" style="margin-left:15px;"/>
                                 </div> 
-                                <div class="field hi-25">
-                                    <!-- Menu image -->
-                                    <div class="col-l"><label class="lable-c" id="LBL_IMAGE" >Image</label> </div>
+                                <div class="field"><!-- Menu image -->
+                                   <div class="col-l"><label class="lable-c" id="LBL_IMAGE" >Image</label> </div>
                                    <div class="choose-image">
                                        <label for="TXT_FILEPATH" id="LBL_FILEPATH" runat="server" class="image-input" >Click to choose image</label>
                                       <input name='upload' type="file" id="TXT_FILEPATH" runat="server" style="display:none;"/>
                                        <asp:Button class="button" style="position:absolute;margin-left:20px;" id="BTN_UPLOAD" Text="Upload" runat="server" OnClick="UPLOAD_Click" />
                                     </div>
-                                </div> 
-                              
+                                </div>                               
                                 <div class="field hi-25">
                                   <label class="col-l lable-c" id="LBL_PRODUCT">Products</label> 
                                   <label class="col-l lable-c" style="margin-left:20px;" >Product list</label> 
                                   <label class="col-l lable-c" style="margin-left:95px; width:120px;">Products chosen</label>  
                                 </div>
                                    <!--Content product-->
-                                   <div class="div-menu-product" style="margin-left:125px;">
+                                   <div class="div-menu-product hi-25" style="margin-left:125px;margin-top:20px;">
                                         <asp:ListBox id="SELECT_SEND_PRODUCT_LEFT"  Rows="10" Width="200px" Height="250" SelectionMode="Multiple"  runat="server" ></asp:ListBox>
-                                        <%--<div class="div-list">
-                                          <asp:ListBox id="TXT_PRODUCT_CHOSEN"  Rows="15" Width="200px" Height="250px" SelectionMode="Multiple"  runat="server"></asp:ListBox>
-                                       </div> 
-                                       <div class="div-chosen">
-                                          <asp:ListBox id="TXT_PRODUCT_LIST"  Rows="15" Width="200px" Height="250px" SelectionMode="Multiple"  runat="server" ></asp:ListBox>
-                                        </div>--%>
-
-                                 </div> <!-- div product end-->  
+                                   </div> <!-- div product end-->  
                               </div>
                     
                             <div class="button-end-center">
@@ -167,15 +155,15 @@
 
                 });
             });
-                $('#TXT_FILEPATH').change(function () {
-            var file = $('#TXT_FILEPATH')[0].files[0];
+            $('#TXT_FILEPATH').change(function () {
+                var file = $('#TXT_FILEPATH')[0].files[0];
                 if (file != null) {
                     $(this).prev('label').text(file.name);
-            }
+                }
                 else {
                     $(this).prev('label').text("");
-            }
-        });
+                }
+            });
         </script>
          <!-- ############ /javascript  ############ -->
          <!-- ############  style  ############ -->
@@ -192,18 +180,5 @@
          
     </footer>
     <!--End Container -->
-    <script>
-        var profilePic = document.getElementById('FILE_PATH'); /* finds the input */
-        function changeLabelText() {
-            var profilePicValue = profilePic.value; /* gets the filepath and filename from the input */
-            var fileNameStart = profilePicValue.lastIndexOf('\\'); /* finds the end of the filepath */
-            profilePicValue = profilePicValue.substr(fileNameStart); /* isolates the filename */
-            var profilePicLabelText = document.getElementById('LBL_FILE'); /* finds the label text */
-            if (profilePicValue !== '') {
-                profilePicLabelText.textContent = profilePicValue; /* changes the label text */
-            }
-        }
-        profilePic.addEventListener('change', changeLabelText, false); /* runs the function whenever the filename in the input is changed */
-    </script>
     </body>
 </html>
