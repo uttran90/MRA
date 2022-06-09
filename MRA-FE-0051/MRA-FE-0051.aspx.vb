@@ -1,9 +1,11 @@
-﻿Imports System.Web.UI.HtmlControls.HtmlGenericControl
-Imports MRACommon
+﻿Imports MRACommon
+
 Public Class MRA_FE_0051
     Inherits System.Web.UI.Page
     Public BL As New Table_BL
-
+    Private Sub MRA_FE_0051_Unload(sender As Object, e As EventArgs) Handles Me.Unload
+        BL.Dispose()
+    End Sub
     '''' <summary>
     '''' initload
     '''' </summary>
@@ -12,8 +14,13 @@ Public Class MRA_FE_0051
     Private Sub MRA_FE_0051_InitLoad(sender As Object, e As EventArgs) Handles Me.Load
         Try
             If Not IsPostBack Then
-                GRD_DATA.DataSource = BL.Load()
-                GRD_DATA.DataBind()
+                If BL.Load().Rows.Count > 0 Then
+                    GRD_DATA.DataSource = BL.Load()
+                    GRD_DATA.DataBind()
+                Else
+                    MsgBox("No data")
+                    Exit Sub
+                End If
             End If
         Catch ex As Exception
             MsgBox("system err")
@@ -29,8 +36,18 @@ Public Class MRA_FE_0051
         strSearch = Trim(TXT_SEARCH.Value)
         Try
             If strSearch <> "" Then
-                GRD_DATA.DataSource = BL.Search(strSearch)
-                GRD_DATA.DataBind()
+                If BL.Search(strSearch).Rows.Count > 0 Then
+                    GRD_DATA.DataSource = BL.Search(strSearch)
+                    GRD_DATA.DataBind()
+                Else
+                    MsgBox("No data")
+                    Exit Sub
+                End If
+            End If
+            If GRD_DATA.Rows.Count > 0 Then
+                BTN_ADD_ROW.Visible = True
+            Else
+                BTN_ADD_ROW.Visible = False
             End If
         Catch ex As Exception
             MsgBox("system err")
@@ -74,8 +91,6 @@ Public Class MRA_FE_0051
                     CommonDB.Rollback()
                 End If
                 CommonDB.Commit()
-                'GRD_DATA.DataBind()
-                'Setting the EditIndex property to -1 to cancel the Edit mode in Gridview
                 showData()
             Catch ex As Exception
                 MsgBox("system err")
@@ -100,7 +115,6 @@ Public Class MRA_FE_0051
                 CommonDB.Rollback()
             End If
             CommonDB.Commit()
-            'Setting the EditIndex property to -1 to cancel the Edit mode in Gridview
             showData()
         Catch ex As Exception
             MsgBox("system err")

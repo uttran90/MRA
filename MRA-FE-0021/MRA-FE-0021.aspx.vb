@@ -4,7 +4,9 @@ Public Class MRA_FE_0021
     Inherits System.Web.UI.Page
 
     Public BL As New Menu_BL
-
+    Private Sub MRA_FE_0021_Unload(sender As Object, e As EventArgs) Handles Me.Unload
+        BL.Dispose()
+    End Sub
     '''' <summary>
     '''' initload
     '''' </summary>
@@ -13,8 +15,13 @@ Public Class MRA_FE_0021
     Private Sub MRA_FE_0021_InitLoad(sender As Object, e As EventArgs) Handles Me.Load
 
         Try
-            GRD_DATA.DataSource = BL.Load()
-            GRD_DATA.DataBind()
+            If BL.Load().Rows.Count > 0 Then
+                GRD_DATA.DataSource = BL.Load()
+                GRD_DATA.DataBind()
+            Else
+                MsgBox("No data")
+                Exit Sub
+            End If
         Catch ex As Exception
             MsgBox("system err")
         End Try
@@ -29,8 +36,13 @@ Public Class MRA_FE_0021
         strSearch = Trim(TXT_SEARCH.Value)
         Try
             If strSearch <> "" Then
-                GRD_DATA.DataSource = BL.Search(strSearch)
-                GRD_DATA.DataBind()
+                If BL.Search(strSearch).Rows.Count > 0 Then
+                    GRD_DATA.DataSource = BL.Search(strSearch)
+                    GRD_DATA.DataBind()
+                Else
+                    MsgBox("No data")
+                    Exit Sub
+                End If
             End If
         Catch ex As Exception
             MsgBox("system err")

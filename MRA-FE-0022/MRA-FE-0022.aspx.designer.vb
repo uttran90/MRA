@@ -68,22 +68,22 @@ Partial Public Class MRA_FE_0022
     Protected WithEvents TXT_NOTE As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''FILE_PATH control.
+    '''LBL_FILEPATH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FILE_PATH As Global.System.Web.UI.WebControls.FileUpload
+    Protected WithEvents LBL_FILEPATH As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''LBL_FILE control.
+    '''TXT_FILEPATH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LBL_FILE As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents TXT_FILEPATH As Global.System.Web.UI.HtmlControls.HtmlInputFile
 
     '''<summary>
     '''BTN_UPLOAD control.
@@ -129,4 +129,13 @@ Partial Public Class MRA_FE_0022
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents BTN_DELETE As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''TXT_PATH control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TXT_PATH As Global.System.Web.UI.HtmlControls.HtmlInputText
 End Class

@@ -61,7 +61,7 @@
                 <!-- Detail Content -->
                  <div class="right-col">
                       <!-- Search area-->
-                      <div class="div-search2">
+                      <div class="div-search1">
                           <%-- <div class="search-content-m" style="padding:0.25rem;">
                                <!--Search by Menu-->
                                  <label class="lbl1" style="width:10%;margin-top:18px;" id="LBL_MENU" >Menu name</label>
