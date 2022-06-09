@@ -5,8 +5,13 @@ Public Class MRA_FE_0031
 
     Private Sub MRA_FE_0031_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
-            GRD_DATA.DataSource = BL.Load()
-            GRD_DATA.DataBind()
+            If BL.Load().Rows.Count > 0 Then
+                GRD_DATA.DataSource = BL.Load()
+                GRD_DATA.DataBind()
+            Else
+                MsgBox("No data")
+                Exit Sub
+            End If
         Catch ex As Exception
             MsgBox("system err")
         End Try
@@ -17,8 +22,13 @@ Public Class MRA_FE_0031
         strSearch = Trim(TXT_SEARCH.Value)
         Try
             If strSearch <> "" Then
-                GRD_DATA.DataSource = BL.Search(strSearch)
-                GRD_DATA.DataBind()
+                If BL.Search(strSearch).Rows.Count > 0 Then
+                    GRD_DATA.DataSource = BL.Search(strSearch)
+                    GRD_DATA.DataBind()
+                Else
+                    MsgBox("No data")
+                    Exit Sub
+                End If
             End If
         Catch ex As Exception
             MsgBox("system err")

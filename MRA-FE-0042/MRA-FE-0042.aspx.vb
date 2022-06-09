@@ -44,15 +44,15 @@ Public Class MRA_FE_0042
         strOrderId = Trim(TXT_SEARCH.Text)
         Try
             If strOrderId <> "" Then
-                GRD_DATA.DataSource = BL.GetOrderInfo(strOrderId)
-                GRD_DATA.DataBind()
-                'SumTotalGRD_DATA_(BL.GetOrderInfo(strOrderId))
-            End If
-
-            If GRD_DATA.Rows.Count > 0 Then
-                BTN_ADD_ROW.Visible = True
-            Else
-                BTN_ADD_ROW.Visible = False
+                If GRD_DATA.Rows.Count > 0 Then
+                    GRD_DATA.DataSource = BL.GetOrderInfo(strOrderId)
+                    GRD_DATA.DataBind()
+                    'SumTotalGRD_DATA_(BL.GetOrderInfo(strOrderId))
+                    BTN_ADD_ROW.Visible = True
+                Else
+                    BTN_ADD_ROW.Visible = False
+                    MsgBox("No data")
+                End If
             End If
         Catch ex As Exception
             MsgBox("system err")
