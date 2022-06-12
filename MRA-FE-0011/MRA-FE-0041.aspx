@@ -68,40 +68,56 @@
                               <!--Search by date -->
                               <label class="lbl1" id="LBL_DATE" >Date</label>                                 
                               <button id="BTN_SEARCH" class="btn1 button" runat="server" style="margin-right:40px;"><span>Search</span></button>
-                              <input type="date" class="date" style="margin-left:90px;" id="DATE_FROM" name="order_date_from"  />
+                              <input type="date" class="date" style="margin-left:90px;" id="DATE_FROM" runat="server"/>
                               <label style="padding:0.15rem;" >-</label> 
-                              <input type="date" class="date"  id="DATE_TO" name="order_date_to"/>
+                              <input type="date" class="date"  id="DATE_TO" runat="server" />
                            </div>
                           <div class="search-content-m" >
-                              <!--Search by time -->                              
+                              <!--Search by time --> 
                              <label class="lbl1" id="LBL_TIME" >Time</label> 
                               <!-- Export CSV-->
-                              <input type="time" class="hour" style="margin-left:95px;" id="TIME_FROM" name="order_time_from" />                            
+                              <input type="time" class="hour" style="margin-left:90px;" id="TIME_FROM" runat="server" step="1" />                            
                               <label style="padding:0.15rem;" >-</label> 
-                              <input type="time" class="hour" id="TIME_TO" name="order_time_to"/> 
-                              <button id="BTN_CSV" class="csv-btn"  runat="server" ><span>Export CSV</span></button>
+                              <input type="time" class="hour" id="TIME_TO" runat="server" step="1"/> 
+                              <button id="BTN_CSV" class="csv-btn"  runat="server" >Export CSV</button>                              
                                </div> 
                         </div>
                       <!--Grid Table-->
                      <div class="div-grid3" > 
                          <div class="tile is-parent is-vertical" >
                              <div class="table-container" >
-                                   <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True"  PageSize="10" class="table table-bordered" ShowFooter="true" >
+                                   <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True"  
+                                       PageSize="10" class="table table-bordered" ShowFooter="true" 
+                                       OnRowEditing="OnRowEditing" OnRowDeleting="OnRowDeleting"
+                                     DataKeyNames="table_info_id">
                                     <Columns>
-                                        <asp:BoundField ItemStyle-Width="15px" DataField="num" HeaderText="No"/>
+                                        <asp:BoundField ItemStyle-Width="15px" DataField="num" HeaderText="No" ReadOnly="true"/>
                                         <asp:hyperlinkfield ItemStyle-Width="20px" datatextfield="table_info_id" HeaderText="ID" 
                                             datanavigateurlfields="table_info_id"
-                                            datanavigateurlformatstring="MRA-FE-0042.aspx?table_info_id={0}"  />
+                                            datanavigateurlformatstring="MRA-FE-0042.aspx?table_info_id={0}"/>
                                          <asp:BoundField ItemStyle-Width="30px" DataField="guess_nm" HeaderText="Customer" />
                                         <asp:BoundField ItemStyle-Width="15px" DataField="guess_count" HeaderText="Customer Count" />
                                         <asp:BoundField ItemStyle-Width="25px" DataField="guess_phone" HeaderText="Customer Phone" />
-                                        <asp:BoundField ItemStyle-Width="15px" DataField="product_count" HeaderText="Product Count" />
-                                        <asp:BoundField ItemStyle-Width="30px" DataField="total" HeaderText="Total" DataFormatString="{0:N2}" />
+                                        <asp:BoundField ItemStyle-Width="15px" DataField="product_count" HeaderText="Product Count" ReadOnly="true"/>
+                                        <asp:BoundField ItemStyle-Width="30px" DataField="total" HeaderText="Total" DataFormatString="{0:N2}" ReadOnly="true"/>
                                         <asp:BoundField ItemStyle-Width="30px" DataField="serve_date" HeaderText="Date" />
                                         <asp:BoundField ItemStyle-Width="30px" DataField="serve_time" HeaderText="Time" />
-                                        <asp:BoundField ItemStyle-Width="20px" DataField="table_nm_vn" HeaderText="Table" />
+                                        <asp:BoundField ItemStyle-Width="20px" DataField="table_nm_vn" HeaderText="Table" ReadOnly="true"/>
                                         <asp:BoundField ItemStyle-Width="80px" DataField="note_tx" HeaderText="Note" />
-                                        
+                                         <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton Text="Edit" runat="server" CommandName="Edit" />
+                                            </ItemTemplate>
+                                            <EditItemTemplate>      
+                                                <asp:LinkButton Text="Update" runat="server" OnClick="OnUpdate" />
+                                                <asp:LinkButton Text="Cancel" runat="server" OnClick="OnCancel" />
+                                            </EditItemTemplate>
+                                            </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton Text="Delete" runat="server" CommandName="Delete" />
+                                            </ItemTemplate>                                         
+                                            </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>  
                             </div>
@@ -110,8 +126,6 @@
                  </div> <!-- div right-col end-->
              </div><!-- content-area end -->  
     </form>
-    <!--<script>document.getElementById('DATE_FROM').valueAsDate = new Date();-->
-    </script>
     <!-- footer -->
      <footer class="div-footer">
     <p>Copyright © 2022 MEO SYSTEM</p>

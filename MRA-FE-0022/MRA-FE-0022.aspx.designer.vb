@@ -59,6 +59,15 @@ Partial Public Class MRA_FE_0022
     Protected WithEvents TXT_NAME_JP As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''TXT_NAME_EN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TXT_NAME_EN As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''TXT_NOTE control.
     '''</summary>
     '''<remarks>

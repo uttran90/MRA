@@ -1,5 +1,4 @@
-﻿
-Imports MRACommon
+﻿Imports MRACommon
 Public Class MenuDetail_BL
     Public CommonDB As CommonDB
     Public CommonUtil As CommonUtil
@@ -21,12 +20,13 @@ Public Class MenuDetail_BL
             sql = ""
             sql &= " select mm.menu_nm_vn"
             sql &= "       ,mm.menu_nm_jp"
+            sql &= "       ,mm.menu_nm_en"
             sql &= "       ,mm.note"
             sql &= "       ,mm.menu_img"
             sql &= " from   m_menu mm"
             sql &= " where  mm.del_fg <> '1' "
             If String.IsNullOrEmpty(strMenuId) = False OrElse String.IsNullOrWhiteSpace(strMenuId) = False Then
-                sql &= "    and mm.menu_id = '" & strMenuId & "'"
+                sql &= "    and mm.menu_id = " & strMenuId
             End If
             sql &= " order  by mm.menu_id asc"
             dt = CommonDB.ExecuteFill(sql)

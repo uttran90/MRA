@@ -32,8 +32,12 @@ Public Class MRA_FE_0032
                     TXT_NM_JP_ON.Text = row("product_nm_jp")
                     TXT_NM_EN_ON.Text = row("product_nm_en")
                     TXT_NM_OFF.Text = row("product_nm_off")
-                    TXT_DES.Text = row("description")
-                    TXT_NOTE.Text = row("note")
+                    If row("description").ToString() <> "" Then
+                        TXT_DES.Text = row("description")
+                    End If
+                    If row("note").ToString() <> "" Then
+                        TXT_NOTE.Text = row("note")
+                    End If
                     TXT_PRICE.Text = row("price")
                     TXT_PRICE_SHOW.Text = row("price_show")
                     'get stt product
@@ -44,20 +48,22 @@ Public Class MRA_FE_0032
                         IMG_ID.ImageUrl = "\image\" & row("product_avatar")
                         LBL_FILEPATH.InnerText = row("product_avatar")
                         TXT_PATH.Value = row("product_avatar")
-                    Else
                     End If
                     'get list opt
-                    GRD_OPT.DataSource = BL.GetProductOptChosen(strProductId)
+                    Dim dtProductChoose As DataTable = BL.GetProductOptChosen(strProductId)
+                    If dtProductChoose.Rows.Count > 0 Then
+                        GRD_OPT.DataSource = dtProductChoose
                         GRD_OPT.DataBind()
-                        'set state update
-                        BTN_ADD_ROW.Visible = True
-                        BTN_ADD.Visible = False
-                        BTN_UPDATE.Visible = True
-                        BTN_DELETE.Visible = True
-                        BTN_UPDATE.Text = LIST_BUTTON_NAME.UPDATE
-                    Else
-                        'set state insert
-                        BTN_ADD_ROW.Visible = False
+                    End If
+                    'set state update
+                    BTN_ADD_ROW.Visible = True
+                    BTN_ADD.Visible = False
+                    BTN_UPDATE.Visible = True
+                    BTN_DELETE.Visible = True
+                    BTN_UPDATE.Text = LIST_BUTTON_NAME.UPDATE
+                Else
+                    'set state insert
+                    BTN_ADD_ROW.Visible = False
                     BTN_ADD.Visible = True
                     BTN_UPDATE.Visible = False
                     BTN_DELETE.Visible = False
@@ -173,9 +179,13 @@ Public Class MRA_FE_0032
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub BTN_Update_Click(sender As Object, e As EventArgs) Handles BTN_UPDATE.Click
-        Dim selListItem As New List(Of String)
         Dim CommonDB As CommonDB = New CommonDB
         CommonDB.BeginTransaction()
+        If TXT_NM_VN_ON.Text = "" Or TXT_NM_JP_ON.Text = "" Or TXT_NM_EN_ON.Text = "" Or TXT_NM_OFF.Text = "" _
+           Or TXT_PRICE.Text = "" Or TXT_PRICE_SHOW.Text = "" Then
+            MsgBox("Name and price must be filled!")
+            Exit Sub
+        End If
         Try
             Dim sql As String
             sql = ""
@@ -256,6 +266,10 @@ Public Class MRA_FE_0032
                 Dim name As String = TryCast(row.Cells(2).Controls(0), TextBox).Text
                 Dim price As String = TryCast(row.Cells(3).Controls(0), TextBox).Text
                 Dim note As String = TryCast(row.Cells(4).Controls(0), TextBox).Text
+                If name = "" Or price = "" Then
+                    MsgBox("Name and price must be filled!")
+                    Exit Sub
+                End If
                 GRD_OPT.EditIndex = -1
                 Dim dt As DataTable = New DataTable
                 Dim sql As String
@@ -314,6 +328,13 @@ Public Class MRA_FE_0032
         Dim CommonDB As CommonDB = New CommonDB
         CommonDB.BeginTransaction()
         Dim strProductId As String = Request.QueryString("product_id")
+        Dim name As String = TXT_OPT_NM.Text
+        Dim price As String = TXT_OPT_PRICE.Text
+
+        If name = "" Or price = "" Then
+            MsgBox("Name and price must be filled!")
+            Exit Sub
+        End If
         Try
             Dim sql As String = ""
             sql = ""
@@ -333,8 +354,8 @@ Public Class MRA_FE_0032
             sql &= ")"
             sql &= "VALUES"
             sql &= " (" & Convert.ToInt32(strProductId)
-            sql &= " ," & CommonDB.EncloseVal(TXT_OPT_NM.Text)
-            sql &= " ," & CommonDB.EncloseVal(TXT_OPT_PRICE.Text)
+            sql &= " ," & CommonDB.EncloseVal(name)
+            sql &= " ," & CommonDB.EncloseVal(price)
             sql &= " ," & CommonDB.EncloseVal(TXT_OPT_NOTE.Text)
             sql &= " ," & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
             sql &= " ,'admin'"

@@ -91,6 +91,10 @@
                                                             <asp:TextBox runat="server" ID="TXT_JP"></asp:TextBox>
                                                         </div>
                                                         <div style="margin-top: 10px;">
+                                                            <label style="font-weight: bold; display: block;">Name EN </label>
+                                                            <asp:TextBox runat="server" ID="TXT_EN"></asp:TextBox>
+                                                        </div>
+                                                        <div style="margin-top: 10px;">
                                                             <label style="font-weight: bold; display: block;">Capacity</label>
                                                             <asp:TextBox runat="server" ID="TXT_CAP"></asp:TextBox>
                                                         </div>
@@ -116,6 +120,7 @@
                                         <asp:BoundField DataField="table_id" HeaderText="ID" ControlStyle-Width="35px" ReadOnly="true"/>
                                         <asp:BoundField DataField="table_nm_vn" HeaderText="Name VN" ControlStyle-Width="80px"/>
                                         <asp:BoundField DataField="table_nm_jp" HeaderText="Name JP" ControlStyle-Width="80px"/>
+                                        <asp:BoundField DataField="table_nm_en" HeaderText="Name EN" ControlStyle-Width="80px"/>
                                         <asp:BoundField DataField="capacity" HeaderText="Capacity" ControlStyle-Width="50px"/>
                                         <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="80px" ReadOnly="true"/>
                                         <asp:BoundField DataField="description" HeaderText="Note" ControlStyle-Width="120px"/>

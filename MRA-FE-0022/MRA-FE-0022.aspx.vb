@@ -34,32 +34,28 @@ Public Class MRA_FE_0022
                     Dim row As DataRow = dt.Rows(0)
                     TXT_NAME_VN.Text = row("menu_nm_vn")
                     TXT_NAME_JP.Text = row("menu_nm_jp")
-                    TXT_NOTE.Text = row("note")
-
+                    TXT_NAME_EN.Text = row("menu_nm_en")
+                    If row("note") <> "" Then
+                        TXT_NOTE.Text = row("note")
+                    End If
                     'get image
                     If row("menu_img").ToString <> "" Then
                         IMG_ID.ImageUrl = "\image\" & row("menu_img")
                         LBL_FILEPATH.InnerText = row("menu_img")
                         TXT_PATH.Value = row("menu_img")
-                    Else
                     End If
                     'set state update
                     BTN_ADD.Visible = False
                     BTN_UPDATE.Visible = True
                     BTN_DELETE.Visible = True
                     BTN_UPDATE.Text = LIST_BUTTON_NAME.UPDATE
-
                 Else
-                        'set state insert
-                        BTN_ADD.Visible = True
+                    'set state insert
+                    BTN_ADD.Visible = True
                     BTN_UPDATE.Visible = False
                     BTN_DELETE.Visible = False
                     BTN_ADD.Text = LIST_BUTTON_NAME.INSERT
                 End If
-                '2listbox
-                'TXT_PRODUCT_LIST.DataSource = dtlist
-                'TXT_PRODUCT_LIST.DataValueField = "product_nm_vn"
-                'TXT_PRODUCT_LIST.DataBind()
                 Dim lstItem As ListItem
                 dtlist = BL.GetListProduct()
                 Dim strProductNm As String = ""
@@ -81,7 +77,6 @@ Public Class MRA_FE_0022
                                         lstItem.Selected = True
                                     End If
                                 Next
-                            Else
                             End If
                         End If
                         strProductNm = row_list("product_nm_vn").ToString()
@@ -132,6 +127,10 @@ Public Class MRA_FE_0022
 
         Dim selListItem As New List(Of String)
         Dim CommonDB As CommonDB = New CommonDB
+        If TXT_NAME_VN.Text = "" Or TXT_NAME_JP.Text = "" Or TXT_NAME_EN.Text = "" Then
+            MsgBox("Name must be filled!")
+            Exit Sub
+        End If
         CommonDB.BeginTransaction()
         Try
             Dim sql As String = ""
@@ -156,7 +155,7 @@ Public Class MRA_FE_0022
             'sql &= " (" & CommonDB.EncloseVal(pd.GetItem("LBL_MENU_ID").ToString())
             sql &= " (" & CommonDB.EncloseVal(TXT_NAME_VN.Text)
             sql &= " ," & CommonDB.EncloseVal(TXT_NAME_JP.Text)
-            sql &= " ,''"
+            sql &= " ," & CommonDB.EncloseVal(TXT_NAME_EN.Text)
             sql &= " ," & CommonDB.EncloseVal(TXT_PATH.Value)
             sql &= " ," & CommonDB.EncloseVal(TXT_NOTE.Text)
             sql &= " ," & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
@@ -205,30 +204,36 @@ Public Class MRA_FE_0022
         Dim selListItem As New List(Of String)
         Dim CommonDB As CommonDB = New CommonDB
         CommonDB.BeginTransaction()
+        If TXT_NAME_VN.Text = "" Or TXT_NAME_JP.Text = "" Or TXT_NAME_EN.Text = "" Then
+            MsgBox("Name must be filled!")
+            Exit Sub
+        End If
         Try
-
+            Dim strMenuId = LBL_MENU_ID.Text
             Dim sql As String
             sql = ""
             sql &= "UPDATE m_menu"
             sql &= "   SET menu_nm_vn = " & CommonDB.EncloseVal(TXT_NAME_VN.Text)
             sql &= "      ,menu_nm_jp = " & CommonDB.EncloseVal(TXT_NAME_JP.Text)
+            sql &= "      ,menu_nm_en = " & CommonDB.EncloseVal(TXT_NAME_EN.Text)
             sql &= "      ,menu_img = " & CommonDB.EncloseVal(TXT_PATH.Value)
             sql &= "      ,note = " & CommonDB.EncloseVal(TXT_NOTE.Text)
             sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
             sql &= "      ,upd_user_id  = 'admin'"
             sql &= "      ,upd_pgm_id   = 'MRA-FE-0022'"
-            sql &= " WHERE menu_id = " & LBL_MENU_ID.Text
+            sql &= " WHERE menu_id = " & strMenuId
             If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
                 CommonDB.Rollback()
             End If
-
+            Dim dtlistc As DataTable
+            dtlistc = BL.GetListChosenProduct(strMenuId)
             If SELECT_SEND_PRODUCT_LEFT.Items.Count > 0 Then
                 For Each productId As ListItem In SELECT_SEND_PRODUCT_LEFT.Items
                     Dim sql1 As String
-                    If productId.Selected = True Then
+                    If productId.Selected = True Then 'products choosen new
                         sql1 = ""
                         sql1 &= "UPDATE m_product"
-                        sql1 &= "   SET menu_id = " & Convert.ToInt32(LBL_MENU_ID.Text)
+                        sql1 &= "   SET menu_id = " & Convert.ToInt32(strMenuId)
                         sql1 &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
                         sql1 &= "      ,upd_user_id  = 'admin'"
                         sql1 &= "      ,upd_pgm_id   = 'MRA-FE-0022'"
@@ -237,13 +242,33 @@ Public Class MRA_FE_0022
                         If Not CommonDB.ExecuteNonQuery(sql1) = 1 Then
                             CommonDB.Rollback()
                         End If
+                    Else 'products choosen old that are unselected
+                        Dim sql2 As String
+                        If dtlistc.Rows.Count > 0 Then
+                            Dim row_listc As DataRow
+                            row_listc = dtlistc.Rows(0)
+                            For Each row_listc In dtlistc.Rows
+                                If row_listc("product_nm_vn").ToString() = productId.Text Then
+                                    sql2 = ""
+                                    sql2 &= "UPDATE m_product"
+                                    sql2 &= "   SET menu_id = 0"
+                                    sql2 &= "      ,upd_dt  = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+                                    sql2 &= "      ,upd_user_id  = 'admin'"
+                                    sql2 &= "      ,upd_pgm_id   = 'MRA-FE-0022'"
+                                    sql2 &= " WHERE product_id   = " & Convert.ToInt32(productId.Value)
+                                    sql2 &= " ; "
+                                    If Not CommonDB.ExecuteNonQuery(sql2) = 1 Then
+                                        CommonDB.Rollback()
+                                    End If
+                                End If
+                            Next
+                        End If
                     End If
                 Next
             End If
             CommonDB.Commit()
             MsgBox("Update OK")
             Response.Redirect("~/MRA-FE-0021.aspx", False)
-
         Catch ex As Exception
             MsgBox("Update except", ex.Message)
         End Try
@@ -258,12 +283,6 @@ Public Class MRA_FE_0022
         Dim CommonDB As CommonDB = New CommonDB
         CommonDB.BeginTransaction()
         Try
-            'Dim bCheck As Boolean = True
-            'If PageData.GetItem(STATE_MODE) = State.Init Then
-            '    PageData.SetItem(STATE_MODE, State.Enter)
-            '    SetStateInfo()
-            'ElseIf PageData.GetItem(STATE_MODE) = State.Enter Then
-
             Dim sql As String
             sql = ""
             sql &= "UPDATE m_menu"
@@ -276,9 +295,6 @@ Public Class MRA_FE_0022
                 CommonDB.Rollback()
             End If
             CommonDB.Commit()
-            'If BL.BtnConfirm(PageData) Then
-            'PageData.SetItem(STATE_MODE, State.Check)
-            'SetStateInfo()
             MsgBox("Delete OK")
             Response.Redirect("~/MRA-FE-0021.aspx", False)
             'End If

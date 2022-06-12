@@ -6,8 +6,7 @@
 <head runat="server">    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="css/mrascss.css" rel="stylesheet" media="screen,print" />
-    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./css/lou-multi-select/css/multi-select.css" />
     <script type="text/javascript" src="js/jquery.multi-select.js"></script>
     <script type="text/javascript" src="js/jquery.quicksearch.js"></script>
@@ -16,6 +15,7 @@
     <!-- bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="css/mrascss.css" rel="stylesheet" media="screen,print" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -71,7 +71,7 @@
                       <!-- Content area-->
                       <div class="div-field">
                           <div class="image">
-                              <asp:Image ID="IMG_ID" runat="server" Height="146px" Width="146px" />
+                              <asp:Image ID="IMG_ID" runat="server"  Height="250px" Width="250px" />
                           </div>
                           <div class="opt-list">                                                        
                                  <button id="BTN_ADD_ROW" runat="server" class="add-row button">Add Opt</button>
@@ -137,13 +137,6 @@
                                   <asp:TextBox class="input-c1" id="TXT_PRICE_SHOW" type="text" runat="server"  style="margin-left:15px;" />                                  
                                   <label style="margin-left:6px;" >円</label>
                               </div><!-- Price end -->
-                              <div class="field">
-                                  <label class="col-l lable-c" id="LBL_TAX" >Tax</label>
-                                  <input type="checkbox" id="CHKB_TAX1" style="margin-left:15px;"/>
-                                  <label for="CHKB_TAX1"> Tax 1</label>
-                                  <input type="checkbox" id="CHKB_TAX2" />
-                                  <label for="CHKB_TAX2"> Tax 2</label>
-                              </div><!-- Tax end -->
                               <div class="field">
                                    <div class="col-l"><label class="lable-c" id="LBL_IMAGE" >Image</label> </div>
                                    <div class="choose-image">

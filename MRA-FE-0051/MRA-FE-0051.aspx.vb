@@ -12,10 +12,12 @@ Public Class MRA_FE_0051
     '''' <param name="sender"></param>
     '''' <param name="e"></param>
     Private Sub MRA_FE_0051_InitLoad(sender As Object, e As EventArgs) Handles Me.Load
+        Dim dt As DataTable
         Try
             If Not IsPostBack Then
-                If BL.Load().Rows.Count > 0 Then
-                    GRD_DATA.DataSource = BL.Load()
+                dt = BL.Load()
+                If dt.Rows.Count > 0 Then
+                    GRD_DATA.DataSource = dt
                     GRD_DATA.DataBind()
                 Else
                     MsgBox("No data")
@@ -34,10 +36,12 @@ Public Class MRA_FE_0051
     Private Sub BTN_SEARCH_ServerClick(sender As Object, e As EventArgs) Handles BTN_SEARCH.ServerClick
         Dim strSearch As String
         strSearch = Trim(TXT_SEARCH.Value)
+        Dim dt As DataTable
         Try
             If strSearch <> "" Then
-                If BL.Search(strSearch).Rows.Count > 0 Then
-                    GRD_DATA.DataSource = BL.Search(strSearch)
+                dt = BL.Search(strSearch)
+                If dt.Rows.Count > 0 Then
+                    GRD_DATA.DataSource = dt
                     GRD_DATA.DataBind()
                 Else
                     MsgBox("No data")
@@ -72,8 +76,13 @@ Public Class MRA_FE_0051
                 Dim table_id As String = row.Cells(1).Text
                 Dim nameVN As String = TryCast(row.Cells(2).Controls(0), TextBox).Text
                 Dim nameJP As String = TryCast(row.Cells(3).Controls(0), TextBox).Text
-                Dim capacity As String = TryCast(row.Cells(4).Controls(0), TextBox).Text
-                Dim description As String = TryCast(row.Cells(6).Controls(0), TextBox).Text
+                Dim nameEN As String = TryCast(row.Cells(4).Controls(0), TextBox).Text
+                Dim capacity As String = TryCast(row.Cells(5).Controls(0), TextBox).Text
+                Dim description As String = TryCast(row.Cells(7).Controls(0), TextBox).Text
+                If nameVN = "" Or nameJP = "" Or nameEN = "" Or capacity = "" Then
+                    MsgBox("Name and capacity must be filled!")
+                    Exit Sub
+                End If
                 GRD_DATA.EditIndex = -1
                 Dim dt As DataTable = New DataTable
                 Dim sql As String
@@ -81,6 +90,7 @@ Public Class MRA_FE_0051
                 sql &= "UPDATE m_table_list"
                 sql &= "   SET table_nm_vn = " & CommonDB.EncloseVal(nameVN)
                 sql &= "      ,table_nm_jp = " & CommonDB.EncloseVal(nameJP)
+                sql &= "      ,table_nm_en = " & CommonDB.EncloseVal(nameEN)
                 sql &= "      ,capacity = " & CommonDB.EncloseVal(capacity)
                 sql &= "      ,description = " & CommonDB.EncloseVal(description)
                 sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
@@ -115,6 +125,7 @@ Public Class MRA_FE_0051
                 CommonDB.Rollback()
             End If
             CommonDB.Commit()
+            'Setting the EditIndex property to -1 to cancel the Edit mode in Gridview
             showData()
         Catch ex As Exception
             MsgBox("system err")
@@ -132,6 +143,11 @@ Public Class MRA_FE_0051
     Private Sub BTN_SAVE_Click(sender As Object, e As EventArgs) Handles BTN_SAVE.Click
         Dim CommonDB As CommonDB = New CommonDB
         CommonDB.BeginTransaction()
+
+        If TXT_VN.Text = "" Or TXT_JP.Text = "" Or TXT_EN.Text = "" Or TXT_CAP.Text = "" Then
+            MsgBox("Name and capacity must be filled!")
+            Exit Sub
+        End If
         Try
             Dim sql As String = ""
             sql = ""
@@ -154,7 +170,7 @@ Public Class MRA_FE_0051
             sql &= ")"
             sql &= "VALUES"
             sql &= " (" & CommonDB.EncloseVal(TXT_VN.Text)
-            sql &= " ,''"
+            sql &= " ," & CommonDB.EncloseVal(TXT_EN.Text)
             sql &= " ," & CommonDB.EncloseVal(TXT_JP.Text)
             sql &= " ,''"
             sql &= " ,'table1.png'"
@@ -183,13 +199,21 @@ Public Class MRA_FE_0051
     Private Sub showData()
         Dim strSearch As String
         strSearch = Trim(TXT_SEARCH.Value)
+        Dim dtl As DataTable
+        Dim dts As DataTable
         Try
+            dtl = BL.Load()
+            dts = BL.Search(strSearch)
             If strSearch <> "" Then
-                GRD_DATA.DataSource = BL.Search(strSearch)
-                GRD_DATA.DataBind()
+                If dts.Rows.Count > 0 Then
+                    GRD_DATA.DataSource = BL.Search(strSearch)
+                    GRD_DATA.DataBind()
+                End If
             Else
-                GRD_DATA.DataSource = BL.Load()
-                GRD_DATA.DataBind()
+                If dtl.Rows.Count > 0 Then
+                    GRD_DATA.DataSource = dtl
+                    GRD_DATA.DataBind()
+                End If
             End If
         Catch ex As Exception
             MsgBox("system err")
