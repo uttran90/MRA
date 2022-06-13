@@ -28,7 +28,7 @@ Public Class OrderDetail_BL
             sql &= "     ,temp.product_opt_nm                        as product_opt_nm"
             sql &= "     ,cast(temp.opt_count  as Unsigned)          as product_opt_count"
             sql &= "     ,cast(temp.product_opt_price as Unsigned)   as product_opt_price"
-            sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y/%m/%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
+            sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y-%m-%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
             sql &= "     ,tbl.table_nm_vn      as table_nm_vn"
             sql &= "     ,case when tti.is_end = '1' then 'Paid'"
             sql &= "            else 'Serving'"
@@ -57,7 +57,7 @@ Public Class OrderDetail_BL
             sql &= "   and tto.product_id       = md.product_id"
             sql &= "   and tto.table_order_id       = temp.table_order_id"
             If String.IsNullOrEmpty(strOrderId) = False OrElse String.IsNullOrWhiteSpace(strOrderId) = False Then
-                sql &= "    and tti.table_info_id = '" & strOrderId & "'"
+                sql &= "    and tti.table_info_id = " & strOrderId
             End If
             sql &= " order  by md.product_id asc"
             dt = CommonDB.ExecuteFill(sql)

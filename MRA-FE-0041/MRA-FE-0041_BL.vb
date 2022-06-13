@@ -10,12 +10,7 @@ Public Class Order_BL
     Public Sub Dispose()
         CommonDB.Dispose()
     End Sub
-    Private Enum DayOfMonth
-        FIRST_DAY = 1
-        LAST_DAY = 2
-    End Enum
-    'Public Function Search(ByRef strSearch As String, ByRef strDateFrom As String, ByRef strDateTo As String, ByRef strTimeFrom As String, ByRef strTimeTo As String) As DataTable
-    Public Function Search(ByRef strSearch As String) As DataTable
+    Public Function Search(ByRef strSearch As String, ByRef strDateFrom As String, ByRef strDateTo As String, ByRef strTimeFrom As String, ByRef strTimeTo As String) As DataTable
         Dim dt As New DataTable
         Dim sql As String
         Try
@@ -26,8 +21,8 @@ Public Class Order_BL
             sql &= "     ,tti.guess_count      as guess_count"
             sql &= "     ,tti.guess_phone      as guess_phone"
             sql &= "     ,t_total.count        as product_count"
-            sql &= "     ,t_total.total        as total"
-            sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y/%m/%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
+            sql &= "     ,t_total.total+(t_total.total*0.1)        as total"
+            sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y-%m-%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
             sql &= "     ,TIME_FORMAT(tti.serve_time,'%H:%i:%s')     as serve_time"
             sql &= "     ,tbl.table_nm_vn      as table_nm_vn"
             sql &= "     ,tti.note_tx          as note_tx"
@@ -77,27 +72,27 @@ Public Class Order_BL
                 sql &= "    or tti.note_tx like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    or DATE_FORMAT(tti.serve_date,'%Y/%m/%d') like '%" & strSearch & "%'"
+                sql &= "    or DATE_FORMAT(tti.serve_date,'%Y-%m-%d') like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
                 sql &= "    or TIME_FORMAT(tti.serve_time,'%H:%i:%s')  like '%" & strSearch & "%')"
             End If
-            ''only from date
-            'If strDateFrom <> "" Then
-            '    sql &= " and DATE_FORMAT(tti.serve_date,'%Y/%m/%d')  >= TIME_FORMAT(" & CommonDB.EncloseVal(GetDayOfMonth(strDateFrom, DayOfMonth.FIRST_DAY)) & ",'%Y/%m/%d')"
-            'End If
-            ''only to date
-            'If strDateTo <> "" Then
-            '    sql &= " and DATE_FORMAT(tti.serve_date,'%Y/%m/%d')  <= TOTIME_FORMAT_DATE(" & CommonDB.EncloseVal(GetDayOfMonth(strDateTo, DayOfMonth.LAST_DAY)) & ",'%Y/%m/%d')"
-            'End If
-            ''only from hour
-            'If strTimeFrom <> "" Then
-            '    sql &= " and TIME_FORMAT(tti.serve_time,'%H:%i:%s') >= TIME_FORMAT(" & CommonDB.EncloseVal(GetDayOfMonth(strTimeFrom, DayOfMonth.FIRST_DAY)) & ",'%H:%i:%s')"
-            'End If
-            ''only to hour
-            'If strTimeTo <> "" Then
-            '    sql &= " and TIME_FORMAT(tti.serve_time,'%H:%i:%s') <= TIME_FORMAT(" & CommonDB.EncloseVal(GetDayOfMonth(strTimeTo, DayOfMonth.LAST_DAY)) & ",'%H:%i:%s')"
-            'End If
+            'only from date
+            If strDateFrom <> "" Then
+                sql &= " and DATE_FORMAT(tti.serve_date,'%Y-%m-%d')  >= DATE_FORMAT(" & CommonDB.EncloseVal(strDateFrom) & ",'%Y-%m-%d')"
+            End If
+            'only to date
+            If strDateTo <> "" Then
+                sql &= "and DATE_FORMAT(tti.serve_date,'%Y-%m-%d')  <= DATE_FORMAT(" & CommonDB.EncloseVal(strDateTo) & ",'%Y-%m-%d')"
+            End If
+            'only from hour
+            If strTimeFrom <> "" Then
+                sql &= " and TIME_FORMAT(tti.serve_time,'%H:%i:%s') >= TIME_FORMAT(" & CommonDB.EncloseVal(strTimeFrom) & ",'%H:%i:%s')"
+            End If
+            'only to hour
+            If strTimeTo <> "" Then
+                sql &= " and TIME_FORMAT(tti.serve_time,'%H:%i:%s') <= TIME_FORMAT(" & CommonDB.EncloseVal(strTimeTo) & ",'%H:%i:%s')"
+            End If
             sql &= " group by t_total.table_info_id"
             sql &= " order  by tti.table_info_id asc"
             dt = CommonDB.ExecuteFill(sql)
@@ -117,8 +112,8 @@ Public Class Order_BL
             sql &= "     ,tti.guess_count      as guess_count"
             sql &= "     ,tti.guess_phone      as guess_phone"
             sql &= "     ,t_total.count        as product_count"
-            sql &= "     ,t_total.total        as total"
-            sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y/%m/%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
+            sql &= "     ,t_total.total + (t_total.total * 0.1)      as total"
+            sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y-%m-%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
             sql &= "     ,TIME_FORMAT(tti.serve_time,'%H:%i:%s')     as serve_time"
             sql &= "     ,tbl.table_nm_vn      as table_nm_vn"
             sql &= "     ,tti.note_tx          as note_tx"
@@ -165,23 +160,6 @@ Public Class Order_BL
             Throw ex
         End Try
     End Function
-    'get day of month function
-    Private Function GetDayOfMonth(ByVal strDate As String, ByVal indexDay As Integer) As String
-        Dim finalDate As String = ""
-        Dim dtmDate As DateTime
-        Try
-            dtmDate = DateTime.ParseExact(strDate, "yyyy/MM/dd", CultureInfo.InvariantCulture)
-            Select Case indexDay
-                Case DayOfMonth.FIRST_DAY
-                    finalDate = New DateTime(dtmDate.Year, dtmDate.Month, 1).ToString("yyyy/MM/dd")
-                Case DayOfMonth.LAST_DAY
-                    dtmDate = New DateTime(dtmDate.Year, dtmDate.Month, 1)
-                    finalDate = dtmDate.AddMonths(1).AddDays(-1).ToString("yyyy/MM/dd")
-            End Select
-            Return finalDate
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
+
 End Class
 

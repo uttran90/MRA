@@ -15,19 +15,20 @@ Public Class MRA_FE_0042
     Private Sub MRA_FE_0042_InitLoad(sender As Object, e As EventArgs) Handles Me.Load
         Dim strOrderId As String = Request.QueryString("table_info_id")
         'Data info order
+        Dim dt As DataTable
         Try
             If Not Page.IsPostBack Then
                 If strOrderId <> "" Then
                     'get data
-                    GRD_DATA.DataSource = BL.GetOrderInfo(strOrderId)
-					Dim row As DataRow = BL.GetOrderInfo(strOrderId).Rows(0)
+                    dt = BL.GetOrderInfo(strOrderId)
+                    GRD_DATA.DataSource = dt
+                    Dim row As DataRow = dt.Rows(0)
                     GRD_DATA.DataBind()
                     'SumTotalGRD_DATA_(BL.GetOrderInfo(strOrderId))
                     TXT_SEARCH.Text = strOrderId
                     TXT_DATE.Text = row("serve_date")
                 Else
                     TXT_SEARCH.Text = ""
-                    BTN_SEARCH.Visible = True
                 End If
             End If
         Catch ex As Exception
@@ -42,15 +43,15 @@ Public Class MRA_FE_0042
     Private Sub BTN_SEARCH_ServerClick(sender As Object, e As EventArgs) Handles BTN_SEARCH.ServerClick
         Dim strOrderId As String
         strOrderId = Trim(TXT_SEARCH.Text)
+        Dim dt As DataTable
         Try
             If strOrderId <> "" Then
-                If GRD_DATA.Rows.Count > 0 Then
-                    GRD_DATA.DataSource = BL.GetOrderInfo(strOrderId)
+                dt = BL.GetOrderInfo(strOrderId)
+                If dt.Rows.Count > 0 Then
+                    GRD_DATA.DataSource = dt
                     GRD_DATA.DataBind()
                     'SumTotalGRD_DATA_(BL.GetOrderInfo(strOrderId))
-                    BTN_ADD_ROW.Visible = True
                 Else
-                    BTN_ADD_ROW.Visible = False
                     MsgBox("No data")
                 End If
             End If
@@ -74,7 +75,6 @@ Public Class MRA_FE_0042
     End Sub
 
     Protected Sub OnRowEditing(sender As Object, e As GridViewEditEventArgs)
-
         GRD_DATA.EditIndex = e.NewEditIndex
         showData()
     End Sub
@@ -156,9 +156,15 @@ Public Class MRA_FE_0042
     Private Sub showData()
         Dim strSearch As String
         strSearch = Trim(TXT_SEARCH.Text)
+        Dim dt As DataTable
         Try
-            GRD_DATA.DataSource = BL.GetOrderInfo(strSearch)
-            GRD_DATA.DataBind()
+            dt = BL.GetOrderInfo(strSearch)
+            If dt.Rows.Count > 0 Then
+                GRD_DATA.DataSource = dt
+                GRD_DATA.DataBind()
+            Else
+                MsgBox("No data")
+            End If
         Catch ex As Exception
             MsgBox("system err")
         End Try

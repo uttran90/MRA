@@ -12,6 +12,7 @@
     <script type="text/javascript" src="js/jquery.quicksearch.js"></script>
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'/>
+     <!-- bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Menu Edit</title>
@@ -64,7 +65,7 @@
                  <div class="right-col" >
                      <div class="div-field">
                          <div class="image">
-                             <asp:Image ID="IMG_ID" runat="server" Height="146px" Width="146px" />
+                             <asp:Image ID="IMG_ID" runat="server" Height="250px" Width="250px" />
                           </div>
                           <div class="content" style="height:620px;">   
                                  <div class="field">                                    
@@ -79,10 +80,10 @@
                                     <label class="col-l lable-c" id="LBL_NAME_JP" >Menu name JP</label>
                                    <asp:TextBox  class="input-c2" id="TXT_NAME_JP" type="text" runat="server" style="margin-left:15px;"/>
                                  </div>
-                                <!--<div class="field hi-25">
-                                     <label class="col-l lable-c"  id="LBL_PRODUCT_COUNT" >Product count</label>                                
-                                     <label class="col-l lable-c" style="margin-left:20px;" id="LBL_PRODUCT_COUNT_SHOW" >5</label>
-                                </div>-->
+                              <div class="field">
+                                    <label class="col-l lable-c" id="LBL_NAME_EN" >Menu name EN</label>
+                                   <asp:TextBox  class="input-c2" id="TXT_NAME_EN" type="text" runat="server" style="margin-left:15px;"/>
+                                 </div>
                                 <div class="field">
                                     <!-- Product Note -->
                                      <label class="col-l lable-c" id="LBL_NOTE" >Note</label> 
@@ -155,15 +156,15 @@
 
                 });
             });
-            $('#TXT_FILEPATH').change(function () {
-                var file = $('#TXT_FILEPATH')[0].files[0];
+                $('#TXT_FILEPATH').change(function () {
+            var file = $('#TXT_FILEPATH')[0].files[0];
                 if (file != null) {
                     $(this).prev('label').text(file.name);
-                }
+            }
                 else {
                     $(this).prev('label').text("");
-                }
-            });
+            }
+        });
         </script>
          <!-- ############ /javascript  ############ -->
          <!-- ############  style  ############ -->
