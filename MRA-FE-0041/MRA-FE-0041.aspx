@@ -95,15 +95,16 @@
                                         <asp:hyperlinkfield ItemStyle-Width="20px" datatextfield="table_info_id" HeaderText="ID" 
                                             datanavigateurlfields="table_info_id"
                                             datanavigateurlformatstring="MRA-FE-0042.aspx?table_info_id={0}"/>
-                                         <asp:BoundField ItemStyle-Width="30px" DataField="guess_nm" HeaderText="Customer" />
-                                        <asp:BoundField ItemStyle-Width="15px" DataField="guess_count" HeaderText="Customer Count" />
-                                        <asp:BoundField ItemStyle-Width="25px" DataField="guess_phone" HeaderText="Customer Phone" />
-                                        <asp:BoundField ItemStyle-Width="15px" DataField="product_count" HeaderText="Product Count" ReadOnly="true"/>
-                                        <asp:BoundField ItemStyle-Width="30px" DataField="total" HeaderText="Total" DataFormatString="{0:N2}" ReadOnly="true"/>
-                                        <asp:BoundField ItemStyle-Width="30px" DataField="serve_date" HeaderText="Date" />
-                                        <asp:BoundField ItemStyle-Width="30px" DataField="serve_time" HeaderText="Time" />
-                                        <asp:BoundField ItemStyle-Width="20px" DataField="table_nm_vn" HeaderText="Table" ReadOnly="true"/>
-                                        <asp:BoundField ItemStyle-Width="80px" DataField="note_tx" HeaderText="Note" />
+                                        <asp:BoundField DataField="guess_nm" HeaderText="Customer" />
+                                        <asp:BoundField DataField="guess_count" HeaderText="Customer Count" />
+                                        <asp:BoundField DataField="guess_phone" HeaderText="Customer Phone" />
+                                        <asp:BoundField DataField="product_count" HeaderText="Product Count" ReadOnly="true"/>
+                                        <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:N2}" ReadOnly="true"/>
+                                        <asp:BoundField DataField="serve_date" HeaderText="Date" />
+                                        <asp:BoundField DataField="serve_time" HeaderText="Time" />
+                                        <asp:BoundField DataField="tax" HeaderText="Tax" />
+                                        <asp:BoundField DataField="table_nm_vn" HeaderText="Table" ReadOnly="true"/>
+                                        <asp:BoundField DataField="note_tx" HeaderText="Note" />
                                          <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:LinkButton Text="Edit" runat="server" CommandName="Edit" />

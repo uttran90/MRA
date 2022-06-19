@@ -90,7 +90,6 @@
                                         <asp:BoundField DataField="product_opt_nm" HeaderText="Option" ControlStyle-Width="80px" ReadOnly ="true"/>
                                         <asp:BoundField DataField="product_opt_count" HeaderText="Option Count" ControlStyle-Width="30px"/>
                                         <asp:BoundField DataField="product_opt_price" HeaderText="Option Price" ControlStyle-Width="50px" ReadOnly ="true"/>
-                                        <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="50px" ReadOnly="true"/>
                                         <asp:BoundField DataField="note_tx" HeaderText="Note" ControlStyle-Width="80px"/>
                                         <asp:TemplateField>
                                             <ItemTemplate>

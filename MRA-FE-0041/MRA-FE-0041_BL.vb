@@ -15,13 +15,27 @@ Public Class Order_BL
         Dim sql As String
         Try
             sql = ""
-            sql &= " select ROW_NUMBER() OVER (ORDER BY tti.table_info_id) AS num"
+            sql &= " select a.num"
+            sql &= " ,a.table_info_id"
+            sql &= " ,a.guess_nm"
+            sql &= " ,a.guess_count"
+            sql &= " ,a.guess_phone"
+            sql &= " ,a.product_count"
+            sql &= " ,case when ttr.VAT is null then a.total"
+            sql &= "  else a.total + a.total * (ttr.VAT/100) "
+            sql &= "  end as total"
+            sql &= " ,a.serve_date"
+            sql &= " ,a.serve_time"
+            sql &= " ,ttr.VAT as tax"
+            sql &= " ,a.table_nm_vn"
+            sql &= " ,a.note_tx"
+            sql &= " from (select ROW_NUMBER() OVER (ORDER BY tti.table_info_id) AS num"
             sql &= "     ,tti.table_info_id    as table_info_id"
             sql &= "     ,tti.guess_nm         as guess_nm"
             sql &= "     ,tti.guess_count      as guess_count"
             sql &= "     ,tti.guess_phone      as guess_phone"
             sql &= "     ,t_total.count        as product_count"
-            sql &= "     ,t_total.total+(t_total.total*0.1)        as total"
+            sql &= "     ,t_total.total        as total"
             sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y-%m-%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
             sql &= "     ,TIME_FORMAT(tti.serve_time,'%H:%i:%s')     as serve_time"
             sql &= "     ,tbl.table_nm_vn      as table_nm_vn"
@@ -36,7 +50,7 @@ Public Class Order_BL
             sql &= "                 ,sum(cast(temp.opt_count as Unsigned) * cast(temp.product_opt_price as Unsigned)) as total_o"
             sql &= "                 ,case when temp.opt_count is null or temp.product_opt_price is null then"
             sql &= "                       sum(cast(tto2.count as Unsigned) * cast(md1.price as Unsigned))"
-            sql &= "                  else sum((cast(tto2.count as Unsigned) * cast(md1.price as Unsigned)) + (cast(temp.opt_count as Unsigned) * cast(temp.product_opt_price as Unsigned))) end as total"
+            sql &= "                  else sum(cast(tto2.count as Unsigned) * cast(md1.price as Unsigned)) + sum(cast(temp.opt_count as Unsigned) * cast(temp.product_opt_price as Unsigned)) end as total"
             sql &= "            from  m_product md1"
             sql &= "                 ,t_table_order tto2"
             sql &= "                 ,t_table_info  tti2"
@@ -83,7 +97,7 @@ Public Class Order_BL
             End If
             'only to date
             If strDateTo <> "" Then
-                sql &= "and DATE_FORMAT(tti.serve_date,'%Y-%m-%d')  <= DATE_FORMAT(" & CommonDB.EncloseVal(strDateTo) & ",'%Y-%m-%d')"
+                sql &= " and DATE_FORMAT(tti.serve_date,'%Y-%m-%d')  <= DATE_FORMAT(" & CommonDB.EncloseVal(strDateTo) & ",'%Y-%m-%d')"
             End If
             'only from hour
             If strTimeFrom <> "" Then
@@ -94,7 +108,10 @@ Public Class Order_BL
                 sql &= " and TIME_FORMAT(tti.serve_time,'%H:%i:%s') <= TIME_FORMAT(" & CommonDB.EncloseVal(strTimeTo) & ",'%H:%i:%s')"
             End If
             sql &= " group by t_total.table_info_id"
-            sql &= " order  by tti.table_info_id asc"
+            sql &= " order by tti.table_info_id asc ) a"
+            sql &= " left join t_table_receipt ttr"
+            sql &= "        on ttr.table_info_id = a.table_info_id "
+            sql &= "       and ttr.del_fg  <> '1' "
             dt = CommonDB.ExecuteFill(sql)
             Return dt
         Catch ex As Exception
@@ -106,13 +123,27 @@ Public Class Order_BL
         Dim sql As String
         Try
             sql = ""
-            sql &= " select ROW_NUMBER() OVER (ORDER BY tti.table_info_id) AS num"
+            sql &= " select a.num"
+            sql &= " ,a.table_info_id"
+            sql &= " ,a.guess_nm"
+            sql &= " ,a.guess_count"
+            sql &= " ,a.guess_phone"
+            sql &= " ,a.product_count"
+            sql &= " ,case when ttr.VAT is null then a.total"
+            sql &= "  else a.total + a.total * (ttr.VAT/100) "
+            sql &= "  end as total"
+            sql &= " ,a.serve_date"
+            sql &= " ,a.serve_time"
+            sql &= " ,ttr.VAT as tax"
+            sql &= " ,a.table_nm_vn"
+            sql &= " ,a.note_tx"
+            sql &= " from (select ROW_NUMBER() OVER (ORDER BY tti.table_info_id) AS num"
             sql &= "     ,tti.table_info_id    as table_info_id"
             sql &= "     ,tti.guess_nm         as guess_nm"
             sql &= "     ,tti.guess_count      as guess_count"
             sql &= "     ,tti.guess_phone      as guess_phone"
             sql &= "     ,t_total.count        as product_count"
-            sql &= "     ,t_total.total + (t_total.total * 0.1)      as total"
+            sql &= "     ,t_total.total        as total"
             sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y-%m-%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
             sql &= "     ,TIME_FORMAT(tti.serve_time,'%H:%i:%s')     as serve_time"
             sql &= "     ,tbl.table_nm_vn      as table_nm_vn"
@@ -127,7 +158,7 @@ Public Class Order_BL
             sql &= "                 ,sum(cast(temp.opt_count as Unsigned) * cast(temp.product_opt_price as Unsigned)) as total_o"
             sql &= "                 ,case when temp.opt_count is null or temp.product_opt_price is null then"
             sql &= "                       sum(cast(tto2.count as Unsigned) * cast(md1.price as Unsigned))"
-            sql &= "                  else sum((cast(tto2.count as Unsigned) * cast(md1.price as Unsigned)) + (cast(temp.opt_count as Unsigned) * cast(temp.product_opt_price as Unsigned))) end as total"
+            sql &= "                  else sum(cast(tto2.count as Unsigned) * cast(md1.price as Unsigned)) + sum(cast(temp.opt_count as Unsigned) * cast(temp.product_opt_price as Unsigned)) end as total"
             sql &= "            from  m_product md1"
             sql &= "                 ,t_table_order tto2"
             sql &= "                 ,t_table_info  tti2"
@@ -149,11 +180,14 @@ Public Class Order_BL
             sql &= "   and  tto.del_fg <> '1' "
             sql &= "   and  tbl.del_fg <> '1' "
             sql &= "   and  md.del_fg  <> '1' "
-            sql &= "   and tti.table_info_id = tto.table_info_id"
-            sql &= "   and tti.table_id      = tbl.table_id"
+            sql &= "   and tti.table_info_id     = tto.table_info_id"
+            sql &= "   and tti.table_id          = tbl.table_id"
             sql &= "   and t_total.table_info_id = tti.table_info_id"
             sql &= " group by t_total.table_info_id"
-            sql &= " order  by tti.table_info_id asc"
+            sql &= " order by tti.table_info_id asc ) a"
+            sql &= " left join t_table_receipt ttr"
+            sql &= "        on ttr.table_info_id = a.table_info_id "
+            sql &= "       and ttr.del_fg  <> '1' "
             dt = CommonDB.ExecuteFill(sql)
             Return dt
         Catch ex As Exception

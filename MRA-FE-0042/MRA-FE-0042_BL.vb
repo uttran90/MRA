@@ -30,9 +30,6 @@ Public Class OrderDetail_BL
             sql &= "     ,cast(temp.product_opt_price as Unsigned)   as product_opt_price"
             sql &= "     ,DATE_FORMAT(tti.serve_date,'%Y-%m-%d')     as serve_date" 'DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
             sql &= "     ,tbl.table_nm_vn      as table_nm_vn"
-            sql &= "     ,case when tti.is_end = '1' then 'Paid'"
-            sql &= "            else 'Serving'"
-            sql &= "        end as table_stt"
             sql &= "     ,tto.note_tx          as note_tx"
             sql &= " from   t_table_info      tti"
             sql &= "       ,t_table_order     tto"

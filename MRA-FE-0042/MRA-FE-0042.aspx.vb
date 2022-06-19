@@ -92,12 +92,49 @@ Public Class MRA_FE_0042
                 Dim count_p As String = TryCast(row.Cells(4).Controls(0), TextBox).Text
                 Dim opt_id As String = TryCast(row.Cells(6).Controls(0), TextBox).Text
                 Dim count_o As String = TryCast(row.Cells(8).Controls(0), TextBox).Text
-                Dim note_tx As String = TryCast(row.Cells(11).Controls(0), TextBox).Text
-                If ((product_id <> "" Or product_id = "0") And count_p = "") _
-                    Or (product_id = "" And (count_p <> "" Or count_p = "0")) _
-                    Or ((opt_id <> "" Or opt_id = "0") And count_o = "") Or (opt_id = "" And (count_o <> "" Or count_o = "0")) Then
+                Dim note_tx As String = TryCast(row.Cells(10).Controls(0), TextBox).Text
+                Dim numExp As New Regex("^[0-9-]*$")
+
+                If Not numExp.Match(product_id).Success Then
+                    MsgBox("Id must be number")
+                    Exit Sub
+                End If
+                If Not numExp.Match(count_p).Success Then
+                    MsgBox("Count product must be number")
+                    Exit Sub
+                End If
+                If Not numExp.Match(opt_id).Success Then
+                    MsgBox("Id must be number")
+                    Exit Sub
+                End If
+                If Not numExp.Match(count_o).Success Then
+                    MsgBox("Count product option must be number")
+                    Exit Sub
+                End If
+                If product_id = "" Then
+                    MsgBox("Can't update null!")
+                    Exit Sub
+                ElseIf Convert.ToInt32(product_id) = 0 Then
+                    MsgBox("Id must be larger than 0")
+                    Exit Sub
+                ElseIf (product_id <> "" And count_p = "") Then
                     MsgBox("ID and count must update together!")
                     Exit Sub
+                ElseIf (product_id <> "" And Convert.ToInt32(count_p) = 0) Then
+                    MsgBox("ID and count must update together!")
+                    Exit Sub
+                End If
+                If opt_id <> "" Then
+                    If count_o = "" Then
+                        MsgBox("ID and count must update together!")
+                        Exit Sub
+                    End If
+                End If
+                If opt_id = "" Then
+                    If count_o <> "" Then
+                        MsgBox("ID and count must update together!")
+                        Exit Sub
+                    End If
                 End If
                 GRD_DATA.EditIndex = -1
                 Dim sql As String
@@ -109,7 +146,7 @@ Public Class MRA_FE_0042
                     sql &= " ,product_opt_id = " & opt_id
                 End If
                 If count_o <> "" Then
-                    sql &= "      ,opt_count      = " & CommonDB.EncloseVal(count_o)
+                    sql &= "  ,opt_count      = " & CommonDB.EncloseVal(count_o)
                 End If
                 sql &= "      ,note_tx        = " & CommonDB.EncloseVal(note_tx)
                 sql &= "      ,upd_dt         = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
