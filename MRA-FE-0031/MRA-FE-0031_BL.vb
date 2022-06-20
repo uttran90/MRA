@@ -24,7 +24,7 @@ Public Class Product_BL
             sql &= "    ,mpro.product_note"
             sql &= "    ,temp.menu_nm_jp"
             sql &= " from m_product mpro"
-            sql &= " left join ( select    mm.menu_nm_jp, mpro1.product_id"
+            sql &= " left join ( select    mm.menu_nm_jp, mm.menu_nm_vn, mpro1.product_id"
             sql &= "             from      m_product mpro1"
             sql &= "             left join m_menu mm "
             sql &= "             on        mm.menu_id = mpro1.menu_id "
@@ -44,10 +44,10 @@ Public Class Product_BL
                 sql &= "    and mpro.product_note like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    and mm.menu_nm_vn like '%" & strSearch & "%'"
+                sql &= "    and temp.menu_nm_vn like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    or mm.menu_nm_jp like '%" & strSearch & "%'"
+                sql &= "    or temp.menu_nm_jp like '%" & strSearch & "%'"
             End If
             sql &= " order by mpro.product_id asc"
             dt = CommonDB.ExecuteFill(sql)
