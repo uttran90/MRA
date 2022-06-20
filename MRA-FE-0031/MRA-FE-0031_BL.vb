@@ -35,16 +35,16 @@ Public Class Product_BL
                 sql &= "    and mpro.product_nm_vn like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    and mpro.product_nm_en like '%" & strSearch & "%'"
+                sql &= "    or mpro.product_nm_en like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    and mpro.product_nm_jp like '%" & strSearch & "%'"
+                sql &= "    or mpro.product_nm_jp like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    and mpro.product_note like '%" & strSearch & "%'"
+                sql &= "    or mpro.product_note like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    and temp.menu_nm_vn like '%" & strSearch & "%'"
+                sql &= "    or temp.menu_nm_vn like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
                 sql &= "    or temp.menu_nm_jp like '%" & strSearch & "%'"
