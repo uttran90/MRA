@@ -39,11 +39,10 @@ Public Class Table_BL
             sql &= " where  mtl.del_fg <> '1' "
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
                 sql &= "    and mtl.table_nm_vn like '%" & strSearch & "%'"
-            End If
-            If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
+                sql &= "    or mtl.table_nm_en like '%" & strSearch & "%'"
                 sql &= "    or mtl.table_nm_jp like '%" & strSearch & "%'"
-            End If
-            If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
+                sql &= "    or mh.attr1_tx like '%" & strSearch & "%'"
+                sql &= "    or mtl.capacity like '%" & strSearch & "%'"
                 sql &= "    or mtl.description like '%" & strSearch & "%'"
             End If
             sql &= " order  by mtl.table_id asc"

@@ -10,13 +10,13 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>ORDERS DETAIL</title>
+    <title>Order Detail</title>
    </head>
 <body>
     <form id="form1" runat="server">    
             <!--Header -->
             <div class="header">
-                 <div class="logo"></div><div class="title">Order List</div>
+                 <div class="logo"></div><div class="title">Order Detail</div>
                 <div class="top-info">
                     
                 </div>
@@ -90,7 +90,6 @@
                                         <asp:BoundField DataField="product_opt_nm" HeaderText="Option" ControlStyle-Width="80px" ReadOnly ="true"/>
                                         <asp:BoundField DataField="product_opt_count" HeaderText="Option Count" ControlStyle-Width="30px"/>
                                         <asp:BoundField DataField="product_opt_price" HeaderText="Option Price" ControlStyle-Width="50px" ReadOnly ="true"/>
-                                        <asp:BoundField DataField="table_stt" HeaderText="Status" ControlStyle-Width="50px" ReadOnly="true"/>
                                         <asp:BoundField DataField="note_tx" HeaderText="Note" ControlStyle-Width="80px"/>
                                         <asp:TemplateField>
                                             <ItemTemplate>

@@ -50,13 +50,14 @@ Public Class MRA_FE_0041
         Try
             If strSearch <> "" Or strDateFrom <> "" Or strDateTo <> "" Or strTimeFrom <> "" Or strTimeTo <> "" Then
                 If strDateFrom <> "" And strDateTo <> "" Then
-                    If (DateTime.Parse(strDateFrom, CultureInfo.InvariantCulture) >= DateTime.Parse(strDateTo, CultureInfo.InvariantCulture)) Then
+                    If (DateTime.Parse(strDateFrom, CultureInfo.InvariantCulture) > DateTime.Parse(strDateTo, CultureInfo.InvariantCulture)) Then
                         MsgBox("From must be less than To")
                         Exit Sub
                     End If
                 End If
                 If strTimeFrom <> "" And strTimeTo <> "" Then
-                    If (DateTime.ParseExact(strTimeFrom, "HH:mm:ss", CultureInfo.InvariantCulture) >= DateTime.ParseExact(strTimeTo, "HH:mm:ss", CultureInfo.InvariantCulture)) Then
+                    If (DateTime.Parse(strDateFrom, CultureInfo.InvariantCulture) = DateTime.Parse(strDateTo, CultureInfo.InvariantCulture)) And
+                       (DateTime.ParseExact(strTimeFrom, "HH:mm:ss", CultureInfo.InvariantCulture) > DateTime.ParseExact(strTimeTo, "HH:mm:ss", CultureInfo.InvariantCulture)) Then
                         MsgBox("From must be less than To")
                         Exit Sub
                     End If
@@ -107,9 +108,18 @@ Public Class MRA_FE_0041
         strDateTo = Trim(DATE_TO.Value)
         strTimeFrom = Trim(TIME_FROM.Value)
         strTimeTo = Trim(TIME_TO.Value)
-        If strDateFrom > strDateTo Or strTimeFrom > strTimeTo Then
-            MsgBox("From must be less than To")
-            Exit Sub
+        If strDateFrom <> "" And strDateTo <> "" Then
+            If (DateTime.Parse(strDateFrom, CultureInfo.InvariantCulture) > DateTime.Parse(strDateTo, CultureInfo.InvariantCulture)) Then
+                MsgBox("From must be less than To")
+                Exit Sub
+            End If
+        End If
+        If strTimeFrom <> "" And strTimeTo <> "" Then
+            If (DateTime.Parse(strDateFrom, CultureInfo.InvariantCulture) = DateTime.Parse(strDateTo, CultureInfo.InvariantCulture)) And
+                       (DateTime.ParseExact(strTimeFrom, "HH:mm:ss", CultureInfo.InvariantCulture) > DateTime.ParseExact(strTimeTo, "HH:mm:ss", CultureInfo.InvariantCulture)) Then
+                MsgBox("From must be less than To")
+                Exit Sub
+            End If
         End If
         Dim dtExport As DataTable
         Response.Clear()
@@ -158,14 +168,25 @@ Public Class MRA_FE_0041
             Dim cus_phone As String = TryCast(row.Cells(4).Controls(0), TextBox).Text
             Dim date_o As String = TryCast(row.Cells(7).Controls(0), TextBox).Text
             Dim time_o As String = TryCast(row.Cells(8).Controls(0), TextBox).Text
-            Dim note As String = TryCast(row.Cells(10).Controls(0), TextBox).Text
-
-            Dim dt As DataTable = New DataTable
+            Dim note As String = TryCast(row.Cells(11).Controls(0), TextBox).Text
+            Dim numExp As New Regex("^[0-9-]*$")
+            If Not numExp.Match(cus_cnt).Success Then
+                MsgBox("Count must be number")
+                Exit Sub
+            End If
+            If Not numExp.Match(cus_phone).Success Then
+                MsgBox("Phone must be number")
+                Exit Sub
+            End If
             Dim sql As String
             sql = ""
             sql &= "UPDATE t_table_info"
             sql &= "   SET guess_nm = " & CommonDB.EncloseVal(cus_nm)
-            sql &= "      ,guess_count = " & CommonDB.EncloseVal(cus_cnt)
+            If Convert.ToInt32(cus_cnt) > 0 Then
+                sql &= "      ,guess_count = " & CommonDB.EncloseVal(cus_cnt)
+            ElseIf Convert.ToInt32(cus_cnt) = 0 Then
+                sql &= "      ,guess_count = ''"
+            End If
             sql &= "      ,guess_phone = " & CommonDB.EncloseVal(cus_phone)
             sql &= "      ,serve_date = DATE_FORMAT(" & CommonDB.EncloseVal(date_o) & ",'%Y-%m-%d')"
             sql &= "      ,serve_time = TIME_FORMAT(" & CommonDB.EncloseVal(time_o) & ",'%H:%i:%s')"
@@ -194,7 +215,6 @@ Public Class MRA_FE_0041
         CommonDB.BeginTransaction()
         Try
             Dim table_info_id As String = e.Keys("table_info_id").ToString()
-            Dim dt As DataTable = New DataTable
             Dim sql As String
             sql = ""
             sql &= "UPDATE t_table_info"
@@ -204,6 +224,30 @@ Public Class MRA_FE_0041
             sql &= "      ,upd_pgm_id   = 'MRA-FE-0041'"
             sql &= " WHERE table_info_id = " & table_info_id
             If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
+                CommonDB.Rollback()
+            End If
+            'delete t_table_order
+            Dim sql1 As String
+            sql1 = ""
+            sql1 &= "UPDATE t_table_order"
+            sql1 &= "   SET del_fg = '1'"
+            sql1 &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sql1 &= "      ,upd_user_id  = 'admin'"
+            sql1 &= "      ,upd_pgm_id   = 'MRA-FE-0041'"
+            sql1 &= " WHERE table_info_id = " & table_info_id
+            If Not CommonDB.ExecuteNonQuery(sql1) = 1 Then
+                CommonDB.Rollback()
+            End If
+            'delete t_table_reciept
+            Dim sql2 As String
+            sql2 = ""
+            sql2 &= "UPDATE t_table_receipt"
+            sql2 &= "   SET del_fg = '1'"
+            sql2 &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sql2 &= "      ,upd_user_id  = 'admin'"
+            sql2 &= "      ,upd_pgm_id   = 'MRA-FE-0041'"
+            sql2 &= " WHERE table_info_id = " & table_info_id
+            If Not CommonDB.ExecuteNonQuery(sql2) = 1 Then
                 CommonDB.Rollback()
             End If
             CommonDB.Commit()
@@ -227,14 +271,11 @@ Public Class MRA_FE_0041
         strDateTo = Trim(DATE_TO.Value)
         strTimeFrom = Trim(TIME_FROM.Value)
         strTimeTo = Trim(TIME_TO.Value)
-        If strDateFrom > strDateTo Or strTimeFrom > strTimeTo Then
-            MsgBox("From must be less than To")
-            Exit Sub
-        End If
+
         Dim dt As DataTable = BL.Search(strSearch, strDateFrom, strDateTo, strTimeFrom, strTimeTo)
         Dim dtl As DataTable = BL.Load()
         Try
-            If strSearch <> "" Then
+            If strSearch <> "" Or strDateFrom <> "" Or strDateTo <> "" Or strTimeFrom <> "" Or strTimeTo <> "" Then
                 If dt.Rows.Count > 0 Then
                     GRD_DATA.DataSource = dt
                     GRD_DATA.DataBind()

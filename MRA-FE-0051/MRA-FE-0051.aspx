@@ -19,7 +19,7 @@
 <form id="form1" runat="server">    
             <!--Header -->
             <div class="header">
-                 <div class="logo"></div><div class="title">Order List</div>
+                 <div class="logo"></div><div class="title">Table List</div>
                 <div class="top-info">
                     
                 </div>
@@ -63,7 +63,7 @@
                       <!-- Search area-->
                       <div class="div-search1">
                            <div class="search-content-m">
-                                    <input class="text-b" id="TXT_SEARCH" type="text" style="margin:20px 0 0 50px" runat="server" placeholder="Input table name, capacity, status, note"/>                                                                                                            
+                                    <input class="text-b" id="TXT_SEARCH" type="text" style="margin:20px 0 0 50px" runat="server" placeholder="Input table name, capacity, note"/>                                                                                                            
                                      <button id="BTN_SEARCH" class="button" runat="server">
                                        <span>Search</span>
                                      </button>

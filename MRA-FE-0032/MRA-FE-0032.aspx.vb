@@ -111,11 +111,33 @@ Public Class MRA_FE_0032
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub BTN_ADD_Click(sender As Object, e As EventArgs) Handles BTN_ADD.Click
+
+        Dim numExp As New Regex("^[0-9-]*$")
+        Dim name_vn_on = TXT_NM_VN_ON.Text
+        Dim name_jp_on = TXT_NM_JP_ON.Text
+        Dim name_en_on = TXT_NM_EN_ON.Text
+        Dim name_off = TXT_NM_OFF.Text
+        Dim price_show = TXT_PRICE_SHOW.Text
+        Dim price_off = TXT_PRICE.Text
+
         Dim CommonDB As CommonDB = New CommonDB
         CommonDB.BeginTransaction()
-        If TXT_NM_VN_ON.Text = "" Or TXT_NM_JP_ON.Text = "" Or TXT_NM_EN_ON.Text = "" Or TXT_NM_OFF.Text = "" _
-           Or TXT_PRICE.Text = "" Or TXT_PRICE_SHOW.Text = "" Then
+
+        If name_vn_on = "" Or name_jp_on = "" Or name_en_on = "" Or name_off = "" _
+           Or price_off = "" Or price_show = "" Then
             MsgBox("Name and price must be filled!")
+            Exit Sub
+        End If
+        If Not numExp.Match(price_show).Success Then
+            MsgBox("Price must be number")
+            Exit Sub
+        End If
+        If Not numExp.Match(price_off).Success Then
+            MsgBox("Price must be number")
+            Exit Sub
+        End If
+        If Convert.ToInt32(price_off) <= 0 Or Convert.ToInt32(price_show) <= 0 Then
+            MsgBox("Price must be lager than 0!")
             Exit Sub
         End If
         Try
@@ -179,11 +201,32 @@ Public Class MRA_FE_0032
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub BTN_Update_Click(sender As Object, e As EventArgs) Handles BTN_UPDATE.Click
+
+        Dim numExp As New Regex("^[0-9-]*$")
+        Dim name_vn_on = TXT_NM_VN_ON.Text
+        Dim name_jp_on = TXT_NM_JP_ON.Text
+        Dim name_en_on = TXT_NM_EN_ON.Text
+        Dim name_off = TXT_NM_OFF.Text
+        Dim price_show = TXT_PRICE_SHOW.Text
+        Dim price_off = TXT_PRICE.Text
+
         Dim CommonDB As CommonDB = New CommonDB
         CommonDB.BeginTransaction()
-        If TXT_NM_VN_ON.Text = "" Or TXT_NM_JP_ON.Text = "" Or TXT_NM_EN_ON.Text = "" Or TXT_NM_OFF.Text = "" _
-           Or TXT_PRICE.Text = "" Or TXT_PRICE_SHOW.Text = "" Then
+        If name_vn_on = "" Or name_jp_on = "" Or name_en_on = "" Or name_off = "" _
+           Or price_off = "" Or price_show = "" Then
             MsgBox("Name and price must be filled!")
+            Exit Sub
+        End If
+        If Not numExp.Match(price_show).Success Then
+            MsgBox("Price show must be number")
+            Exit Sub
+        End If
+        If Not numExp.Match(price_off).Success Then
+            MsgBox("Price must be number")
+            Exit Sub
+        End If
+        If Convert.ToInt32(price_off) <= 0 Or Convert.ToInt32(price_show) <= 0 Then
+            MsgBox("Price must be lager than 0!")
             Exit Sub
         End If
         Try
@@ -266,8 +309,17 @@ Public Class MRA_FE_0032
                 Dim name As String = TryCast(row.Cells(2).Controls(0), TextBox).Text
                 Dim price As String = TryCast(row.Cells(3).Controls(0), TextBox).Text
                 Dim note As String = TryCast(row.Cells(4).Controls(0), TextBox).Text
+                Dim numExp As New Regex("^[0-9-]*$")
                 If name = "" Or price = "" Then
                     MsgBox("Name and price must be filled!")
+                    Exit Sub
+                End If
+                If Not numExp.Match(price).Success Then
+                    MsgBox("Price must be number")
+                    Exit Sub
+                End If
+                If Convert.ToInt32(price) <= 0 Then
+                    MsgBox("Price must be lager than 0!")
                     Exit Sub
                 End If
                 GRD_OPT.EditIndex = -1
@@ -330,9 +382,17 @@ Public Class MRA_FE_0032
         Dim strProductId As String = Request.QueryString("product_id")
         Dim name As String = TXT_OPT_NM.Text
         Dim price As String = TXT_OPT_PRICE.Text
-
+        Dim numExp As New Regex("^[0-9-]*$")
         If name = "" Or price = "" Then
             MsgBox("Name and price must be filled!")
+            Exit Sub
+        End If
+        If Not numExp.Match(price).Success Then
+            MsgBox("Price must be number")
+            Exit Sub
+        End If
+        If Convert.ToInt32(price) <= 0 Then
+            MsgBox("Price must be lager than 0!")
             Exit Sub
         End If
         Try
