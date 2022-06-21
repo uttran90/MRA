@@ -83,6 +83,11 @@ Public Class MRA_FE_0051
                     MsgBox("Name and capacity must be filled!")
                     Exit Sub
                 End If
+                Dim numExp As New Regex("^[1-9-]*$")
+                If Not numExp.Match(capacity).Success Then
+                    MsgBox("Capacity must be number >0")
+                    Exit Sub
+                End If
                 GRD_DATA.EditIndex = -1
                 Dim dt As DataTable = New DataTable
                 Dim sql As String
@@ -146,6 +151,11 @@ Public Class MRA_FE_0051
 
         If TXT_VN.Text = "" Or TXT_JP.Text = "" Or TXT_EN.Text = "" Or TXT_CAP.Text = "" Then
             MsgBox("Name and capacity must be filled!")
+            Exit Sub
+        End If
+        Dim numExp As New Regex("^[1-9-]*$")
+        If Not numExp.Match(TXT_CAP.Text).Success Then
+            MsgBox("Capacity must be number >0")
             Exit Sub
         End If
         Try
