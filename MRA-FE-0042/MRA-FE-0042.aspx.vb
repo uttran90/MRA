@@ -136,6 +136,22 @@ Public Class MRA_FE_0042
                         Exit Sub
                     End If
                 End If
+                Dim dtP As New DataTable
+                Dim dtO As New DataTable
+                If product_id <> "" Then
+                    dtP = BL.GetProduct(product_id)
+                    If dtP.Rows(0)("count") = 0 Then
+                        MsgBox("Product not exist!")
+                        Exit Sub
+                    End If
+                End If
+                If opt_id <> "" Then
+                    dtO = BL.GetProductOpt(opt_id)
+                    If dtO.Rows(0)("count") = 0 Then
+                        MsgBox("Product option not exist!")
+                        Exit Sub
+                    End If
+                End If
                 GRD_DATA.EditIndex = -1
                 Dim sql As String
                 sql = ""
@@ -178,7 +194,7 @@ Public Class MRA_FE_0042
             sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
             sql &= "      ,upd_user_id  = 'admin'"
             sql &= "      ,upd_pgm_id   = 'MRA-FE-0042'"
-            sql &= " WHERE table_info_id = '" & strOrderId & "'"
+            sql &= " WHERE table_info_id = " & strOrderId
             sql &= "    and product_id       = " & table_order_id
             If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
                 CommonDB.Rollback()

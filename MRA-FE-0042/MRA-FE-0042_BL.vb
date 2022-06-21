@@ -116,5 +116,35 @@ Public Class OrderDetail_BL
             Throw ex
         End Try
     End Function
+    Public Function GetProduct(strProductID As String) As DataTable
+        Dim dt As New DataTable
+        Dim sql As String
+        Try
+            sql = ""
+            sql &= " select count(*) as count"
+            sql &= " from  m_product         mp"
+            sql &= " where    mp.product_id  = " & strProductID
+            sql &= "   and    mp.del_fg      <> '1' "
+            dt = CommonDB.ExecuteFill(sql)
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    Public Function GetProductOpt(strProductOptID As String) As DataTable
+        Dim dt As New DataTable
+        Dim sql As String
+        Try
+            sql = ""
+            sql &= " select count(*) as count"
+            sql &= " from  m_product         mp"
+            sql &= " where    mp.product_id  = " & strProductOptID
+            sql &= "   and    mp.del_fg      <> '1' "
+            dt = CommonDB.ExecuteFill(sql)
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 End Class
 
