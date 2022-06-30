@@ -51,8 +51,7 @@
     <Reference Include="MRA-FW">
       <HintPath>..\MRA-FW\bin\MRA-FW.dll</HintPath>
     </Reference>
-    <Reference Include="MRACommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MRACommon">
       <HintPath>..\MRACommon\bin\MRACommon.dll</HintPath>
     </Reference>
     <Reference Include="System" />

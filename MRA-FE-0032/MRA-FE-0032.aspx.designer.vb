@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class MRA_FE_0032
 
     '''<summary>
+    '''PageHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PageHeader As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''form1 control.
     '''</summary>
     '''<remarks>
@@ -23,31 +32,13 @@ Partial Public Class MRA_FE_0032
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''IMG_ID control.
+    '''Menu control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents IMG_ID As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''BTN_ADD_ROW control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents BTN_ADD_ROW As Global.System.Web.UI.HtmlControls.HtmlButton
-
-    '''<summary>
-    '''GRD_OPT control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents GRD_OPT As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents Menu As Global.System.Web.UI.UserControl
 
     '''<summary>
     '''LBL_ID control.
@@ -176,40 +167,13 @@ Partial Public Class MRA_FE_0032
     Protected WithEvents TXT_NOTE As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''BTN_ADD control.
+    '''BTN_ADD_ROW control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents BTN_ADD As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''BTN_UPDATE control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents BTN_UPDATE As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''BTN_DELETE control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents BTN_DELETE As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''LBL_PRO control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LBL_PRO As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents BTN_ADD_ROW As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
     '''TXT_OPT_NM control.
@@ -246,6 +210,60 @@ Partial Public Class MRA_FE_0032
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents BTN_SAVE As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''GRD_OPT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents GRD_OPT As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''BTN_ADD control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_ADD As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''BTN_UPDATE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_UPDATE As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''BTN_DELETE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_DELETE As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''BTN_BACK control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_BACK As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''IMG_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents IMG_ID As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
     '''TXT_PATH control.

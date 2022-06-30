@@ -1,19 +1,24 @@
-﻿
+﻿Imports MRACommon.CommonUtil
 Public Class MRA_FE_0031
-    Inherits System.Web.UI.Page
+    Inherits MRA_FW.BasePL
+
     Public BL As New Product_BL
 
-    Private Sub MRA_FE_0031_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub MRA_FE_0031_Load(sender As Object, e As EventArgs) Handles Me.InitLoad
         Try
+            ClearMessages()
+            AddMessage("MSG_1000_01")
             If BL.Load().Rows.Count > 0 Then
                 GRD_DATA.DataSource = BL.Load()
                 GRD_DATA.DataBind()
             Else
-                MsgBox("No data")
+                AddMessage("MSG_0001_04")
+                GRD_DATA.DataSource = New List(Of String)
+                GRD_DATA.DataBind()
                 Exit Sub
             End If
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
 
@@ -21,17 +26,21 @@ Public Class MRA_FE_0031
         Dim strSearch As String
         strSearch = Trim(TXT_SEARCH.Value)
         Try
+            ClearMessages()
             If strSearch <> "" Then
                 If BL.Search(strSearch).Rows.Count > 0 Then
                     GRD_DATA.DataSource = BL.Search(strSearch)
                     GRD_DATA.DataBind()
+                    AddMessage("MSG_1000_01")
                 Else
-                    MsgBox("No data")
+                    AddMessage("MSG_0001_04")
+                    GRD_DATA.DataSource = New List(Of String)
+                    GRD_DATA.DataBind()
                     Exit Sub
                 End If
             End If
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
 
@@ -44,6 +53,7 @@ Public Class MRA_FE_0031
         Dim strSearch As String
         strSearch = Trim(TXT_SEARCH.Value)
         Try
+            ClearMessages()
             If strSearch <> "" Then
                 GRD_DATA.DataSource = BL.Search(strSearch)
                 GRD_DATA.DataBind()
@@ -51,8 +61,9 @@ Public Class MRA_FE_0031
                 GRD_DATA.DataSource = BL.Load()
                 GRD_DATA.DataBind()
             End If
+            AddMessage("MSG_1000_01")
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
 End Class

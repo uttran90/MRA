@@ -16,9 +16,10 @@ Public Class Product_BL
         Dim sql As String
         Try
             sql = ""
-            sql &= " select ROW_NUMBER() OVER (ORDER BY product_id) AS num"
+            sql &= " select ROW_NUMBER() OVER (ORDER BY product_id desc) AS num"
             sql &= "    ,mpro.product_id"
             sql &= "    ,mpro.product_nm_jp"
+            sql &= "    ,mpro.product_nm_vn"
             sql &= "    ,mpro.price_show"
             sql &= "    ,case when mpro.product_stt_id ='0' then 'ON' ELSE 'OFF' END as product_stt"
             sql &= "    ,mpro.product_note"
@@ -32,7 +33,7 @@ Public Class Product_BL
             sql &= " on    temp.product_id = mpro.product_id"
             sql &= " where mpro.del_fg <> '1' "
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    and mpro.product_nm_vn like '%" & strSearch & "%'"
+                sql &= "    and (mpro.product_nm_vn like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
                 sql &= "    or mpro.product_nm_en like '%" & strSearch & "%'"
@@ -47,9 +48,9 @@ Public Class Product_BL
                 sql &= "    or temp.menu_nm_vn like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    or temp.menu_nm_jp like '%" & strSearch & "%'"
+                sql &= "    or temp.menu_nm_jp like '%" & strSearch & "%')"
             End If
-            sql &= " order by mpro.product_id asc"
+            sql &= " order by mpro.product_id desc"
             dt = CommonDB.ExecuteFill(sql)
             Return dt
         Catch ex As Exception
@@ -62,9 +63,10 @@ Public Class Product_BL
         Dim sql As String
         Try
             sql = ""
-            sql &= " select ROW_NUMBER() OVER (ORDER BY product_id) AS num"
+            sql &= " select ROW_NUMBER() OVER (ORDER BY product_id desc) AS num"
             sql &= "    ,mpro.product_id"
             sql &= "    ,mpro.product_nm_jp"
+            sql &= "    ,mpro.product_nm_vn"
             sql &= "    ,mpro.price_show"
             sql &= "    ,case when mpro.product_stt_id ='0' then 'ON' ELSE 'OFF' END as product_stt"
             sql &= "    ,mpro.product_note"
@@ -77,7 +79,7 @@ Public Class Product_BL
             sql &= "             and       mm.del_fg <> '1' ) temp"
             sql &= " on    temp.product_id = mpro.product_id"
             sql &= " where mpro.del_fg <> '1' "
-            sql &= " order by mpro.product_id asc"
+            sql &= " order by mpro.product_id desc"
             dt = CommonDB.ExecuteFill(sql)
             Return dt
         Catch ex As Exception

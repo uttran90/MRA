@@ -19,15 +19,16 @@ Public Class Menu_BL
         Dim sql As String
         Try
             sql = ""
-            sql &= " select ROW_NUMBER() OVER (ORDER BY menu_id) AS num"
+            sql &= " select ROW_NUMBER() OVER (ORDER BY menu_id desc) AS num"
             sql &= "    ,mm.menu_id"
             sql &= "    ,mm.menu_nm_vn"
             sql &= "    ,mm.menu_nm_jp"
+            sql &= "    ,mm.menu_nm_en"
             sql &= "    ,mm.note"
             sql &= " from   m_menu mm"
-            sql &= " where  mm.del_fg <> '1' "
+            sql &= " where  mm.del_fg <> '1'"
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    and mm.menu_nm_vn like '%" & strSearch & "%'"
+                sql &= "    and (mm.menu_nm_vn like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
                 sql &= "    or mm.menu_nm_en like '%" & strSearch & "%'"
@@ -36,9 +37,9 @@ Public Class Menu_BL
                 sql &= "    or mm.menu_nm_jp like '%" & strSearch & "%'"
             End If
             If String.IsNullOrEmpty(strSearch) = False OrElse String.IsNullOrWhiteSpace(strSearch) = False Then
-                sql &= "    or mm.note like '%" & strSearch & "%'"
+                sql &= "    or mm.note like '%" & strSearch & "%')"
             End If
-            sql &= " order  by mm.menu_id asc"
+            sql &= " order  by mm.menu_id desc"
             dt = CommonDB.ExecuteFill(sql)
             Return dt
         Catch ex As Exception
@@ -51,14 +52,15 @@ Public Class Menu_BL
         Try
 
             sql = ""
-            sql &= " select ROW_NUMBER() OVER (ORDER BY menu_id) AS num"
+            sql &= " select ROW_NUMBER() OVER (ORDER BY menu_id desc) AS num"
             sql &= "    ,mm.menu_id"
             sql &= "    ,mm.menu_nm_vn"
             sql &= "    ,mm.menu_nm_jp"
+            sql &= "    ,mm.menu_nm_en"
             sql &= "    ,mm.note"
             sql &= " from m_menu mm"
             sql &= " where mm.del_fg <> '1' "
-            sql &= " order by mm.menu_id asc"
+            sql &= " order by mm.menu_id desc"
             dt = CommonDB.ExecuteFill(sql)
             Return dt
         Catch ex As Exception

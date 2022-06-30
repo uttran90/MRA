@@ -1,12 +1,13 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MRA-FE-0022.aspx.vb" Inherits=".MRA_FE_0022" %>
-
+<%@ Register Tagprefix="hed" Tagname="PageHeader" Src="PageHeader.ascx" %>
+<%@ Register Tagprefix="menu" Tagname="Menu" Src="Menu.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">    
+<head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="css/mrascss.css" rel="stylesheet" media="screen,print" />
-     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./css/lou-multi-select/css/multi-select.css" />
     <script type="text/javascript" src="js/jquery.multi-select.js"></script>
     <script type="text/javascript" src="js/jquery.quicksearch.js"></script>
@@ -15,107 +16,139 @@
      <!-- bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/mra.js"></script>
     <title>Menu Edit</title>
+
 </head>
 <body>
-    <form id="form1" runat="server" method="post" >   
-            <!--Header -->
-            <div class="header">
-                 <div class="logo"></div>
-                <div class="title">Menu Detail</div>
-                <div class="top-info" >
-                    
-                </div>
-            </div>
+    <hed:PageHeader ID="PageHeader" runat="server"></hed:PageHeader>
+    <!--Header -->
+    <div class="header">
+         <div class="logo"></div>
+        <div class="title">Menu Detail</div>
+        <div class="top-info" >
+            
+        </div>
+    </div>
+    <form id="form1" runat="server" method="post" >
             <!--Content -->
-            <div class="content-area">  
-                <!-- Side Navigator -->
-                 <div class="left-col">
-                          <ul class="nav-links">
-                             <li>
-                                 <div class="icon-link">
-                                      <a href="#">
-                                          <i class='bx bxs-food-menu'></i>
-                                          <span class="link_name">MENU</span> 
-                                          </a>   
-                                 </div>
-                                 <ul class="sub-menu">
-                                      <li><a href="MRA-FE-0021.aspx">Menu List</a></li>     
-                                      <li><a href="MRA-FE-0022.aspx?menu_id=">Menu Edit</a></li>
-                                      <li><a href="MRA-FE-0031.aspx">Product List</a></li>
-                                      <li><a href="MRA-FE-0032.aspx?product_id=">Product Edit</a></li>
-                                  </ul>
-                             </li>
-                             <li>
-                                 <div class="icon-link">
-                                      <a href="#">
-                                          <i class='bx bx-list-ul' ></i>
-                                          <span class="link_name">ORDERS</span> 
-                                          </a> 
-                                  </div>                                 
-                                 <ul class="sub-menu">
-                                     <li><a href="MRA-FE-0041.aspx">Orders List</a></li>
-                                     <li><a href="MRA-FE-0042.aspx?table_info_id=">Orders Detail</a></li>
-                                     <li><a href="MRA-FE-0051.aspx">Table List</a></li>
-                                 </ul>
-                              </li>
-                        </ul>
-                     </div>                
-                <!-- Detail Content -->
-                 <div class="right-col" >
-                     <div class="div-field">
-                         <div class="image">
-                             <asp:Image ID="IMG_ID" runat="server" Height="250px" Width="250px" />
-                          </div>
-                          <div class="content" style="height:620px;">   
-                                 <div class="field">                                    
-                                   <label class="col-l lable-c" id="LBL_ID" >Menu ID</label>
-                                   <asp:label id="LBL_MENU_ID" style="margin-left:15px;width:50px;align-content:center;" runat="server" ></asp:label>  
-                                 </div><!-- Menu id -->
-                                 <div class="field">                                    
-                                    <label class="col-l lable-c" id="LBL_NAME_VN" >Menu name VN</label>
-                                    <asp:TextBox  class="input-c2" id="TXT_NAME_VN" type="text" runat="server" style="margin-left:15px;"/>
-                                 </div><!-- Menu name -->
-                                 <div class="field">
-                                    <label class="col-l lable-c" id="LBL_NAME_JP" >Menu name JP</label>
-                                   <asp:TextBox  class="input-c2" id="TXT_NAME_JP" type="text" runat="server" style="margin-left:15px;"/>
-                                 </div>
-                              <div class="field">
-                                    <label class="col-l lable-c" id="LBL_NAME_EN" >Menu name EN</label>
-                                   <asp:TextBox  class="input-c2" id="TXT_NAME_EN" type="text" runat="server" style="margin-left:15px;"/>
-                                 </div>
-                                <div class="field">
-                                    <!-- Product Note -->
-                                     <label class="col-l lable-c" id="LBL_NOTE" >Note</label> 
-                                    <asp:TextBox class="input-c2" id="TXT_NOTE" type="text" runat="server" style="margin-left:15px;"/>
-                                </div> 
-                                <div class="field"><!-- Menu image -->
-                                   <div class="col-l"><label class="lable-c" id="LBL_IMAGE" >Image</label> </div>
-                                   <div class="choose-image">
-                                       <label for="TXT_FILEPATH" id="LBL_FILEPATH" runat="server" class="image-input" >Click to choose image</label>
-                                      <input name='upload' type="file" id="TXT_FILEPATH" runat="server" style="display:none;"/>
-                                       <asp:Button class="button" style="position:absolute;margin-left:20px;" id="BTN_UPLOAD" Text="Upload" runat="server" OnClick="UPLOAD_Click" />
+            <div>
+                <div class="container-fluid">
+                    <div class="row flex-nowrap">
+                        <!--add menu -->
+                        <menu:Menu ID="Menu" runat="server"></menu:Menu>
+                        <div class="col py-3 content">
+                            <div class="row flex-nowrap">
+                                <!-- input area-->
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label class="col-l lable-c" id="LBL_ID" >Menu ID</label>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group mb-3 content-input">
+                                                <asp:label id="LBL_MENU_ID" runat="server" ></asp:label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>                               
-                                <div class="field hi-25">
-                                  <label class="col-l lable-c" id="LBL_PRODUCT">Products</label> 
-                                  <label class="col-l lable-c" style="margin-left:20px;" >Product list</label> 
-                                  <label class="col-l lable-c" style="margin-left:95px; width:120px;">Products chosen</label>  
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="input-group-addon">Menu name VN</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group mb-3 content-input">
+                                                <asp:TextBox  Cssclass="form-control" id="TXT_NAME_VN" type="text" runat="server"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="input-group-addon">Menu name JP</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group mb-3 content-input">
+                                                <asp:TextBox  Cssclass="form-control" id="TXT_NAME_JP" type="text" runat="server"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="input-group-addon">Menu name EN</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group mb-3 content-input">
+                                                <asp:TextBox  Cssclass="form-control" id="TXT_NAME_EN" type="text" runat="server"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="input-group-addon">Note</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group mb-3 content-input">
+                                                <asp:TextBox  Cssclass="form-control" TextMode="MultiLine" Height="96px" id="TXT_NOTE" type="text"  runat="server"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="input-group-addon">Image</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group mb-3 content-input">
+                                                <label for="TXT_FILEPATH" id="LBL_FILEPATH" runat="server" class="form-control" >Click to choose image</label>
+                                                <input name='upload' type="file" id="TXT_FILEPATH" runat="server" style="display:none;"/>
+                                                <div class="input-group-append">
+                                                    <asp:Button class="button" CssClass="btn btn-info" id="BTN_UPLOAD" Text="Upload" runat="server" OnClick="UPLOAD_Click"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="input-group-addon">Products</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div style="float:left"><label class="col-l lable-c">Product list</label> </div>
+                                                    <div style="float:right"><label class="col-l lable-c">Products chosen</label> </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:ListBox id="SELECT_SEND_PRODUCT_LEFT"  Rows="10" Width="200px" SelectionMode="Multiple"  runat="server" ></asp:ListBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--button -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="input-group-addon"></span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group content-input flex-nowrap">
+                                                <div class="my-4"><asp:button id="BTN_ADD" cssclass="btn btn-success" runat="server" Text="Add" autopostback="false" Width="120px"/></div>
+                                                <div class="my-4"><asp:button id="BTN_UPDATE" cssclass="btn btn-primary" runat="server" Text="Update" autopostback="false" Width="120px"/></div>
+                                                <div class="p-4"><asp:button id="BTN_DELETE" CssClass="btn btn-danger" runat="server" Text="Delete" autopostback="false"  Width="120px" OnClientClick="Confirm('Delete')"/></div>
+                                                <div class="my-4"><asp:button id="BTN_BACK" cssclass="btn bg-dark text-white" runat="server" Text="BACK" autopostback="false" Width="120px"/></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                   <!--Content product-->
-                                   <div class="div-menu-product hi-25" style="margin-left:125px;margin-top:20px;">
-                                        <asp:ListBox id="SELECT_SEND_PRODUCT_LEFT"  Rows="10" Width="200px" Height="250" SelectionMode="Multiple"  runat="server" ></asp:ListBox>
-                                   </div> <!-- div product end-->  
-                              </div>
-                    
-                            <div class="button-end-center">
-                                  <asp:button id="BTN_ADD" class="button" runat="server" Text="Add" autopostback="false" />
-                                  <asp:button id="BTN_UPDATE" class="button" runat="server" Text="Update" autopostback="false" />
-                                  <asp:button id="BTN_DELETE" class="button" runat="server" Text="Delete" autopostback="false" />
-                             </div>
-                    </div><!-- div field end-->
-                 </div> <!-- div right-col end-->
-             </div> <!-- content-area end --> 
+                                 <!-- image area-->
+                                 <div class="col-auto col-md-4">
+                                     <div class="image">
+                                        <asp:Image ID="IMG_ID" runat="server"/>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div> <!-- div right-col end-->
+                    </div>
+                </div>
+            </div> <!-- content-area end --> 
         <input type="text" id="TXT_PATH" runat="server" style="display:none;"/>
         <script type="text/javascript">
             $(function () {
@@ -174,12 +207,6 @@
          </style>
          <!-- ############  /style  ############ -->
     </form>
-    <!-- footer -->
-     <footer class="div-footer">
-
-    <p>Copyright © 2022 MEO SYSTEM</p>
-         
-    </footer>
     <!--End Container -->
     </body>
 </html>

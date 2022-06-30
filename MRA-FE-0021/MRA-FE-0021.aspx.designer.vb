@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class MRA_FE_0021
 
     '''<summary>
+    '''PageHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PageHeader As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''form1 control.
     '''</summary>
     '''<remarks>
@@ -21,6 +30,15 @@ Partial Public Class MRA_FE_0021
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''Menu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Menu As Global.System.Web.UI.UserControl
 
     '''<summary>
     '''TXT_SEARCH control.

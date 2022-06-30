@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class MRA_FE_0022
 
     '''<summary>
+    '''PageHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PageHeader As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''form1 control.
     '''</summary>
     '''<remarks>
@@ -23,13 +32,13 @@ Partial Public Class MRA_FE_0022
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''IMG_ID control.
+    '''Menu control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents IMG_ID As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents Menu As Global.System.Web.UI.UserControl
 
     '''<summary>
     '''LBL_MENU_ID control.
@@ -138,6 +147,24 @@ Partial Public Class MRA_FE_0022
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents BTN_DELETE As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''BTN_BACK control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_BACK As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''IMG_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents IMG_ID As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
     '''TXT_PATH control.

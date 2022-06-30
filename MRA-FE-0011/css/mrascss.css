@@ -3,7 +3,6 @@
 }
 
 body {
-    background-color: #FFFBEB;
     margin: 0;
     border: 1px solid #c7c7c7;
 }
@@ -51,11 +50,35 @@ body {
     color: #C65911;
     text-align: center;
     width: 70px;
-    height: 30px;
+    height: 39px;
     border-style: initial;
     border-radius:2px;
 }
+.menu {
+    color: #0d6efd;
+    background: #FFFBEB;
+    border: 1px solid #c7c7c7;
+    /*height: 780px !important;*/
+    position: relative;
+}
+    .menu ul li:hover {
+        background: #FCE4D6;
+        list-style: none;
+        transition: all 0.4s ease;
+    }
+    .menu ul li a {
+        align-items: center;
+        font-size: 17px;
+        white-space: nowrap;
+    }
 
+.content {
+    width: 84% !important;
+    /*height:700px !important;*/
+}
+.content-input {
+    width: 66% !important;
+}
 .input, .textarea {
     border-radius: 4px;
     height: 25px;
@@ -133,76 +156,33 @@ body {
     border: 1px solid #c7c7c7;
     position:fixed;
 }
-    .left-col .nav-links {
-        height:600PX;
-    }
-        .left-col .nav-links li {
-            list-style: none;
-            transition: all 0.4s ease;
-        }
-            .left-col .nav-links li:hover {
-                background: #FCE4D6;
-                list-style: none;
-                transition: all 0.4s ease;
-            }
-            .left-col .nav-links li .icon-link {
-                display: flex;
-                align-items: center;
-                justify-content:space-between;
-            }
-            .left-col .nav-links li i {
-                font-size: 50px;
-                height:50px;
-                line-height:50px;
-            }
-            .left-col .nav-links li a {
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-            }
-                .left-col .nav-links li a .link_name {
-                    font-size: 20px;
-                    font-weight: 400;
-                    color: #f19a82;
-                }
-            .left-col .nav-links li .sub-menu {
-                padding: 0px 0px 0px 48px;
-                margin-top: -10px;
-                background: #FFFBEB;
-            }
-            .left-col .nav-links li .sub-menu a{
-                padding: 5px 0;
-                font-size:17px;   
-                white-space:nowrap;  
-            }
+
 .right-col {
     float: right;
     width: 88%;
     height: 700px;
     border: 1px solid #c7c7c7;
     background-color: #fff;
-    margin-left: 200px;
+    /*margin-left: 200px;*/
     padding: 0px, 10px;
     position: absolute;
 }
 .div-footer {
-position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: #f19a82;
+    width:100%;
+    position: absolute;
+    bottom: 0px;
     text-align: center;
 }
-/*1 row in search*/
-.div-search1 {
-    width: 600px;
-    height: 80px;
-    border: 1px solid #c7c7c7;
-    border-radius: 6px;
-    margin-left: 2px;
-    margin-top: 2px;
-    position: absolute;
-}
+    .div-footer p {
+        color:#000;
+        font-size:11pt;
+    }
+    /*1 row in search*/
+    .div-search {
+        width: 600px;
+        border: 1px solid #c7c7c7;
+        border-radius: 6px;
+    }
 /*2 row in search*/
 .div-search2 {
     width: 600px;
@@ -262,13 +242,11 @@ position: fixed;
                 border-radius:4px;
             }
 .div-grid1 {
-    width: 100%;
-    height: 610px;
+    width: 100%;    
     border: 1px solid #c7c7c7;
     border-radius: 4px;
-    margin-left: 2px;
-    margin-top: 85px;
-    position: absolute;
+/*    margin-left: 2px;
+    margin-top: 85px;*/
 }
 .div-grid2 {
     width: 100%;
@@ -338,11 +316,6 @@ position: fixed;
     margin-top: 2px;
     padding:0.25rem;
 }
-.content {
-        width: 620px;
-        border: 1px solid #c7c7c7;
-        border-radius: 4px;
- }
 .field {
     margin: 2px 0 0 2px;
     padding:0.5rem;
@@ -356,7 +329,6 @@ position: fixed;
 
 .lable-c {
         height: 30px;
-        width: 80px;
     }
 .input-c1 {
         margin: 2px 0 0 20px;
@@ -388,18 +360,25 @@ position: fixed;
         height: 30px;
     }
 .image {
-    float:right;
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     border-radius: 2px;
     border: 1px solid #c7c7c7;
+    background: #c7c7c7;
+}
+    .image img {
+        width: 200px;
+        height: 200px;
+    }
+#TXT_NOTE, #TXT_DES, #TXT_OPT_NOTE {
+    resize: none;
 }
 
 .button-end-center {
     width: 300px;
     height: 50px;
     border-radius: 4px;
-    margin:8px 0 0 230px;
+    margin: 8px 0 0 230px;
     position: absolute;
 }
 .head {
@@ -477,7 +456,7 @@ table tbody tr td table tbody tr td {
     margin-left: 615px;
     position: absolute;
 }
-required_mark {
+.required_mark {
     color: red;
 }
 .field .image-input {

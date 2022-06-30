@@ -113,5 +113,60 @@ Public Class ProductDetail_BL
             Throw ex
         End Try
     End Function
+
+    Public Function fncDelete(ByVal strProductId As String) As Boolean
+        Dim CommonDB As CommonDB = New CommonDB
+        Try
+            CommonDB.BeginTransaction()
+            Dim sql As String
+            sql = ""
+            sql &= "UPDATE m_product"
+            sql &= "   SET del_fg = '1'"
+            sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sql &= "      ,upd_user_id  = 'admin'"
+            sql &= "      ,upd_pgm_id   = 'MRA-FE-0032'"
+            sql &= " WHERE product_id = " & CommonDB.EncloseVal(strProductId)
+            If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
+                CommonDB.Rollback()
+            End If
+            'delete product option
+            If Not fncDeleteOpt(strProductId, CommonDB) Then
+                CommonDB.Rollback()
+                Return False
+            End If
+            CommonDB.Commit()
+            Return True
+        Catch ex As Exception
+            CommonDB.Rollback()
+            Throw ex
+        Finally
+            If Not CommonDB Is Nothing Then
+                CommonDB.Dispose()
+            End If
+        End Try
+    End Function
+
+    Private Function fncDeleteOpt(ByVal strProductId As String, ByRef CommonDB As CommonDB) As Boolean
+        Try
+            Dim sql As String
+            sql = ""
+            sql &= "UPDATE m_product_opt"
+            sql &= "   SET del_fg = '1'"
+            sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sql &= "      ,upd_user_id  = 'admin'"
+            sql &= "      ,upd_pgm_id   = 'MRA-FE-0022'"
+            sql &= " WHERE product_opt_id in (select proopt.product_opt_id from m_product_opt proopt where proopt.product_id = " & CommonDB.EncloseVal(strProductId) & ")"
+            If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            Throw ex
+        Finally
+            If Not CommonDB Is Nothing Then
+                CommonDB.Dispose()
+            End If
+        End Try
+    End Function
 End Class
 

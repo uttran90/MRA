@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class MRA_FE_0042
 
     '''<summary>
+    '''PageHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PageHeader As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''form1 control.
     '''</summary>
     '''<remarks>
@@ -21,6 +30,15 @@ Partial Public Class MRA_FE_0042
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''Menu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Menu As Global.System.Web.UI.UserControl
 
     '''<summary>
     '''TXT_SEARCH control.
@@ -32,15 +50,6 @@ Partial Public Class MRA_FE_0042
     Protected WithEvents TXT_SEARCH As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''BTN_SEARCH control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents BTN_SEARCH As Global.System.Web.UI.HtmlControls.HtmlButton
-
-    '''<summary>
     '''TXT_DATE control.
     '''</summary>
     '''<remarks>
@@ -50,58 +59,13 @@ Partial Public Class MRA_FE_0042
     Protected WithEvents TXT_DATE As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''BTN_ADD_ROW control.
+    '''BTN_SEARCH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents BTN_ADD_ROW As Global.System.Web.UI.HtmlControls.HtmlButton
-
-    '''<summary>
-    '''DD_PRODUCT control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DD_PRODUCT As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''TXT_COUNT control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TXT_COUNT As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Option control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents [Option] As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''TXT_OPT_COUNT control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TXT_OPT_COUNT As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''BTN_SAVE control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents BTN_SAVE As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents BTN_SEARCH As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
     '''GRD_DATA control.

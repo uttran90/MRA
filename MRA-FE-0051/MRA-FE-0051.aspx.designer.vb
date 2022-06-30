@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class MRA_FE_0051
 
     '''<summary>
+    '''PageHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PageHeader As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''form1 control.
     '''</summary>
     '''<remarks>
@@ -23,6 +32,15 @@ Partial Public Class MRA_FE_0051
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
+    '''Menu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Menu As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''TXT_SEARCH control.
     '''</summary>
     '''<remarks>
@@ -30,6 +48,24 @@ Partial Public Class MRA_FE_0051
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TXT_SEARCH As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''DATE_FROM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DATE_FROM As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
+
+    '''<summary>
+    '''DATE_TO control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DATE_TO As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
 
     '''<summary>
     '''BTN_SEARCH control.

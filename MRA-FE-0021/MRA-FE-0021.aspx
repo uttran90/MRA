@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MRA-FE-0021.aspx.vb" Inherits=".MRA_FE_0021" %>
-
+<%@ Register Tagprefix="hed" Tagname="PageHeader" Src="PageHeader.ascx" %>
+<%@ Register Tagprefix="menu" Tagname="Menu" Src="Menu.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,88 +14,59 @@
     <title>Menu List</title>
 </head>
 <body>
-    <form id="form1" runat="server">    
-            <!--Header -->
-            <div class="header">
-                 <div class="logo"> </div><div class="title">Menu List</div>
-                <div class="top-info">
-                    
-                </div>
-            </div>
+    <hed:PageHeader ID="PageHeader" runat="server"></hed:PageHeader>
+    <!--Header -->
+    <div class="header">
+         <div class="logo"> </div><div class="title">Menu List</div>
+        <div class="top-info">
+            
+        </div>
+    </div>
+    <form id="form1" runat="server" autocomplete="off">
             <!--Content -->
-            <div class="content-area">  
-                <!-- Side Navigator -->
-                 <div class="left-col">
-                          <ul class="nav-links">
-                             <li>
-                                 <div class="icon-link">
-                                      <a href="#">
-                                          <i class='bx bxs-food-menu'></i>
-                                          <span class="link_name">MENU</span> 
-                                          </a>   
-                                 </div>
-                                 <ul class="sub-menu">
-                                      <li><a href="MRA-FE-0021.aspx">Menu List</a></li>     
-                                      <li><a href="MRA-FE-0022.aspx?menu_id=">Menu Edit</a></li>
-                                      <li><a href="MRA-FE-0031.aspx">Product List</a></li>
-                                      <li><a href="MRA-FE-0032.aspx?product_id=">Product Edit</a></li>
-                                  </ul>
-                             </li>
-                             <li>
-                                 <div class="icon-link">
-                                      <a href="#">
-                                          <i class='bx bx-list-ul' ></i>
-                                          <span class="link_name">ORDERS</span> 
-                                          </a> 
-                                  </div>                                 
-                                 <ul class="sub-menu">
-                                     <li><a href="MRA-FE-0041.aspx">Orders List</a></li>
-                                     <li><a href="MRA-FE-0042.aspx?table_info_id=">Orders Detail</a></li>
-                                     <li><a href="MRA-FE-0051.aspx">Table List</a></li>
-                                 </ul>
-                              </li>
-                        </ul>
-                     </div>                
-                <!-- Detail Content -->
-                 <div class="right-col">
-                      <!-- Search area-->
-                      <div class="div-search1">
-                          <div class="search-content-m">
-                                    <input class="text-b" id="TXT_SEARCH" type="text" style="margin:20px 0 0 50px" runat="server" placeholder="Input menu name, product name, note"/>                                                                                                            
-                                     <button id="BTN_SEARCH" class="button" runat="server">
-                                       <span>Search</span>
-                                     </button>
-                         </div>
-                       </div>
-                     <!--Grid Table-->
-                     <div class="div-grid1">
-                     <div class="tile is-parent is-vertical">
-                             <div class="table-container">
-                                 <asp:GridView ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10" class="table table-bordered" >
-                                    <Columns>
-                                        <asp:BoundField ItemStyle-Width="15px" DataField="num" HeaderText="No"/>
-                                        <asp:hyperlinkfield ItemStyle-Width="20px" datatextfield="menu_id" HeaderText="ID" 
-                                            datanavigateurlfields="menu_id"
-                                            datanavigateurlformatstring="MRA-FE-0022.aspx?menu_id={0}"  />
-                                         <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_vn" HeaderText="Menu Name VN" />
-                                         <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_jp" HeaderText="Menu Name JP" />
-                                         <asp:BoundField ItemStyle-Width="150px" DataField="note" HeaderText="Note" />
-                                    </Columns>
-                                </asp:GridView>  
+            <div>
+                <div class="container-fluid">
+                    <div class="row flex-nowrap">
+                        <!--add menu -->
+                        <menu:Menu ID="Menu" runat="server"></menu:Menu>
+                        <div class="col py-3 content">
+                            <div class="row flex-nowrap px-4">
+                                <!-- Search area-->
+                                <div class="div-search  py-2" style="width: 600px !important">
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="TXT_SEARCH" runat="server" placeholder="Input menu name, product name, note"/>
+                                            <div class="input-group-append">
+                                              <button id="BTN_SEARCH" class="btn btn-primary" type="submit" runat="server">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="row flex-nowrap">
+                                <div class="div-grid">
+                                    <div class="tile is-parent is-vertical">
+                                        <div class="table-container">
+                                            <asp:GridView ShowHeaderWhenEmpty="true" ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10" class="table table-bordered" >
+                                               <Columns>
+                                                   <asp:BoundField ItemStyle-Width="15px" DataField="num" HeaderText="No"/>
+                                                   <asp:hyperlinkfield ItemStyle-Width="150px" datatextfield="menu_nm_jp" HeaderText="Menu Name JP" 
+                                                       datanavigateurlfields="menu_id"
+                                                       datanavigateurlformatstring="MRA-FE-0022.aspx?menu_id={0}"  />
+                                                    <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_vn" HeaderText="Menu Name VN" />
+                                                    <asp:BoundField ItemStyle-Width="150px" DataField="menu_nm_en" HeaderText="Menu Name En" />
+                                                    <asp:BoundField ItemStyle-Width="200px" DataField="note" HeaderText="Note" />
+                                               </Columns>
+                                           </asp:GridView>  
+                                        </div>
+                                    </div>
+                                </div> <!-- div grid end-->
+                            </div><!--Grid Table-->
+                        </div> <!-- div right-col end-->
                     </div>
-                    </div> <!-- div grid end-->
-       
-                 </div> <!-- div right-col end-->
-
-             </div><!-- content-area end -->  
-      
+                </div>
+            </div><!-- content-area end -->
     </form>
-    <!-- footer -->
-     <footer class="div-footer">
-    <p>Copyright © 2022 MEO SYSTEM</p>
-    </footer>
     <!--End Container -->
-  
 </body>
 </html>

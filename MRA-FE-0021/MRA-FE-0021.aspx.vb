@@ -1,7 +1,7 @@
-﻿Imports System.Threading.Tasks
-Imports System.Web.UI.HtmlControls.HtmlGenericControl
+﻿Imports MRACommon.CommonUtil
+
 Public Class MRA_FE_0021
-    Inherits System.Web.UI.Page
+    Inherits MRA_FW.BasePL
 
     Public BL As New Menu_BL
     Private Sub MRA_FE_0021_Unload(sender As Object, e As EventArgs) Handles Me.Unload
@@ -12,18 +12,22 @@ Public Class MRA_FE_0021
     '''' </summary>
     '''' <param name="sender"></param>
     '''' <param name="e"></param>
-    Private Sub MRA_FE_0021_InitLoad(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub MRA_FE_0021_InitLoad(sender As Object, e As EventArgs) Handles Me.InitLoad
 
         Try
+            ClearMessages()
+            AddMessage("MSG_1000_01")
             If BL.Load().Rows.Count > 0 Then
                 GRD_DATA.DataSource = BL.Load()
                 GRD_DATA.DataBind()
             Else
-                MsgBox("No data")
+                AddMessage("MSG_0001_04")
+                GRD_DATA.DataSource = New List(Of String)
+                GRD_DATA.DataBind()
                 Exit Sub
             End If
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
     ''' <summary>
@@ -35,17 +39,21 @@ Public Class MRA_FE_0021
         Dim strSearch As String
         strSearch = Trim(TXT_SEARCH.Value)
         Try
+            ClearMessages()
             If strSearch <> "" Then
                 If BL.Search(strSearch).Rows.Count > 0 Then
                     GRD_DATA.DataSource = BL.Search(strSearch)
                     GRD_DATA.DataBind()
+                    AddMessage("MSG_1000_01")
                 Else
-                    MsgBox("No data")
+                    AddMessage("MSG_0001_04")
+                    GRD_DATA.DataSource = New List(Of String)
+                    GRD_DATA.DataBind()
                     Exit Sub
                 End If
             End If
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
     'Change page in datagrid
@@ -66,7 +74,7 @@ Public Class MRA_FE_0021
                 GRD_DATA.DataBind()
             End If
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
 End Class

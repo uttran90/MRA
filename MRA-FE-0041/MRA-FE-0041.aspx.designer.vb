@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class MRA_FE_0041
 
     '''<summary>
+    '''PageHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PageHeader As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''form1 control.
     '''</summary>
     '''<remarks>
@@ -23,6 +32,15 @@ Partial Public Class MRA_FE_0041
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
+    '''Menu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Menu As Global.System.Web.UI.UserControl
+
+    '''<summary>
     '''TXT_SEARCH control.
     '''</summary>
     '''<remarks>
@@ -30,15 +48,6 @@ Partial Public Class MRA_FE_0041
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TXT_SEARCH As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-    '''<summary>
-    '''BTN_SEARCH control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents BTN_SEARCH As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
     '''DATE_FROM control.
@@ -75,6 +84,15 @@ Partial Public Class MRA_FE_0041
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TIME_TO As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
+
+    '''<summary>
+    '''BTN_SEARCH control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BTN_SEARCH As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
     '''BTN_CSV control.

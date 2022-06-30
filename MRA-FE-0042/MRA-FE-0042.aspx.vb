@@ -1,7 +1,9 @@
 ﻿Imports MRACommon
+Imports MRACommon.CommonUtil
 
 Public Class MRA_FE_0042
-    Inherits System.Web.UI.Page
+    Inherits MRA_FW.BasePL
+
     Public BL As New OrderDetail_BL
 
     Private Sub MRA_FE_0042_Unload(sender As Object, e As EventArgs) Handles Me.Unload
@@ -12,12 +14,14 @@ Public Class MRA_FE_0042
     '''' </summary>
     '''' <param name="sender"></param>
     '''' <param name="e"></param>
-    Private Sub MRA_FE_0042_InitLoad(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub MRA_FE_0042_InitLoad(sender As Object, e As EventArgs) Handles Me.InitLoad
         Dim strOrderId As String = Request.QueryString("table_info_id")
         'Data info order
         Dim dt As DataTable
         Try
-            If Not Page.IsPostBack Then
+            ClearMessages()
+            AddMessage("MSG_1000_01")
+            If Not IsPostBack Then
                 If strOrderId <> "" Then
                     'get data
                     dt = BL.GetOrderInfo(strOrderId)
@@ -32,7 +36,7 @@ Public Class MRA_FE_0042
                 End If
             End If
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
     ''' <summary>
@@ -45,6 +49,7 @@ Public Class MRA_FE_0042
         strOrderId = Trim(TXT_SEARCH.Text)
         Dim dt As DataTable
         Try
+            ClearMessages()
             If strOrderId <> "" Then
                 dt = BL.GetOrderInfo(strOrderId)
                 If dt.Rows.Count > 0 Then
@@ -52,11 +57,14 @@ Public Class MRA_FE_0042
                     GRD_DATA.DataBind()
                     'SumTotalGRD_DATA_(BL.GetOrderInfo(strOrderId))
                 Else
-                    MsgBox("No data")
+                    AddMessage("MSG_0001_04")
+                    GRD_DATA.DataSource = New List(Of String)
+                    GRD_DATA.DataBind()
                 End If
             End If
+            AddMessage("MSG_1000_01")
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
     'Change page in datagrid
@@ -71,6 +79,7 @@ Public Class MRA_FE_0042
         GRD_DATA.FooterRow.Cells(1).Text = "Sum"
         GRD_DATA.FooterRow.Cells(1).Font.Bold = True
         GRD_DATA.FooterRow.Cells(1).HorizontalAlign = HorizontalAlign.Right
+        GRD_DATA.FooterRow.Cells(1).Attributes.Add("style", "Background:#65add7")
         GRD_DATA.FooterRow.Cells(2).Text = total.ToString("N2")
     End Sub
 
@@ -96,43 +105,43 @@ Public Class MRA_FE_0042
                 Dim numExp As New Regex("^[0-9-]*$")
 
                 If Not numExp.Match(product_id).Success Then
-                    MsgBox("Id must be number")
+                    AddMessage("MSG_1000_04", {"Product id"})
                     Exit Sub
                 End If
                 If Not numExp.Match(count_p).Success Then
-                    MsgBox("Count product must be number")
+                    AddMessage("MSG_1000_04", {"Product count"})
                     Exit Sub
                 End If
                 If Not numExp.Match(opt_id).Success Then
-                    MsgBox("Id must be number")
+                    AddMessage("MSG_1000_04", {"Option id"})
                     Exit Sub
                 End If
                 If Not numExp.Match(count_o).Success Then
-                    MsgBox("Count product option must be number")
+                    AddMessage("MSG_1000_04", {"Option count"})
                     Exit Sub
                 End If
                 If product_id = "" Then
-                    MsgBox("Can't update null!")
+                    AddMessage("MSG_9000_03", {"Product id"})
                     Exit Sub
                 ElseIf Convert.ToInt32(product_id) = 0 Then
-                    MsgBox("Id must be larger than 0")
+                    AddMessage("MSG_1000_06", {"Product id"})
                     Exit Sub
                 ElseIf (product_id <> "" And count_p = "") Then
-                    MsgBox("ID and count must update together!")
+                    AddMessage("MSG_1000_07", {"ProductId and ProductCount"})
                     Exit Sub
                 ElseIf (product_id <> "" And Convert.ToInt32(count_p) = 0) Then
-                    MsgBox("ID and count must update together!")
+                    AddMessage("MSG_1000_07", {"ProductId and ProductCount"})
                     Exit Sub
                 End If
                 If opt_id <> "" Then
                     If count_o = "" Then
-                        MsgBox("ID and count must update together!")
+                        AddMessage("MSG_1000_07", {"OptionId and OptionCount"})
                         Exit Sub
                     End If
                 End If
                 If opt_id = "" Then
                     If count_o <> "" Then
-                        MsgBox("ID and count must update together!")
+                        AddMessage("MSG_1000_07", {"OptionId and OptionCount"})
                         Exit Sub
                     End If
                 End If
@@ -141,14 +150,14 @@ Public Class MRA_FE_0042
                 If product_id <> "" Then
                     dtP = BL.GetProduct(product_id)
                     If dtP.Rows(0)("count") = 0 Then
-                        MsgBox("Product not exist!")
+                        AddMessage("MSG_0001_06", {"Product"})
                         Exit Sub
                     End If
                 End If
                 If opt_id <> "" Then
                     dtO = BL.GetProductOpt(opt_id)
                     If dtO.Rows(0)("count") = 0 Then
-                        MsgBox("Product option not exist!")
+                        AddMessage("MSG_0001_06", {"Product option"})
                         Exit Sub
                     End If
                 End If
@@ -176,7 +185,7 @@ Public Class MRA_FE_0042
                 CommonDB.Commit()
                 showData()
             Catch ex As Exception
-                MsgBox("system err")
+                AddMessage("MSG_9000_01", {ex.Message})
             End Try
         End If
     End Sub
@@ -202,7 +211,7 @@ Public Class MRA_FE_0042
             CommonDB.Commit()
             showData()
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
     'ShowData method for Displaying Data in Gridview
@@ -216,10 +225,12 @@ Public Class MRA_FE_0042
                 GRD_DATA.DataSource = dt
                 GRD_DATA.DataBind()
             Else
-                MsgBox("No data")
+                AddMessage("MSG_0001_04")
+                GRD_DATA.DataSource = New List(Of String)
+                GRD_DATA.DataBind()
             End If
         Catch ex As Exception
-            MsgBox("system err")
+            AddMessage("MSG_9000_01", {ex.Message})
         End Try
     End Sub
     Protected Sub Cancel(sender As Object, e As EventArgs)
@@ -235,10 +246,12 @@ Public Class MRA_FE_0042
                 Dim row As DataRow = BL.GetOrderInfo(strOrderId).Rows(0)
                 TXT_DATE.Text = row("serve_date")
             Else
-                MsgBox("No data!")
+                AddMessage("MSG_0001_04")
+                GRD_DATA.DataSource = New List(Of String)
+                GRD_DATA.DataBind()
             End If
         Else
-                MsgBox("Input key search!")
+            AddMessage("MSG_9000_03", {"Search key"})
         End If
     End Sub
 End Class

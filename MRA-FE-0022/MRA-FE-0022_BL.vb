@@ -1,7 +1,7 @@
 ﻿Imports MRACommon
+Imports MRACommon.CommonUtil
 Public Class MenuDetail_BL
     Public CommonDB As CommonDB
-    Public CommonUtil As CommonUtil
     Public Sub New()
         MyBase.New
         CommonDB = New CommonDB
@@ -104,90 +104,7 @@ Public Class MenuDetail_BL
             Throw ex
         End Try
     End Function
-    '''' <summary>
-    '''' BtnConfirmInUp
-    '''' </summary>
-    '''' <returns>Boolean</returns>
-    'Public Function BtnConfirm(ByRef pd As PageData) As Boolean
 
-    '    Dim sql As String = ""
-    '    Dim sql1 As String = ""
-    '    CommonDB.BeginTransaction()
-    '    Try
-    '        Dim strShoriMode As String = pd.GetItem(CommonUtil.SHORI_MODE)
-    '        Select Case strShoriMode
-    '            Case CommonUtil.LIST_MODE.INSERT
-    '                sql = ""
-    '                sql &= "INSERT INTO m_menu"
-    '                sql &= "("
-    '                'sql &= " menu_id"
-    '                sql &= ",menu_nm_vn"
-    '                sql &= ",menu_nm_jp"
-    '                sql &= ",menu_nm_en"
-    '                sql &= ",menu_img"
-    '                sql &= ",note"
-    '                sql &= ",crt_dt"
-    '                sql &= ",crt_user_id"
-    '                sql &= ",crt_pgm_id"
-    '                sql &= ")"
-    '                sql &= "VALUES"
-    '                'sql &= " (" & CommonDB.EncloseVal(pd.GetItem("LBL_MENU_ID").ToString())
-    '                sql &= " ," & CommonDB.EncloseVal(pd.GetItem("TXT_NAME_VN").ToString())
-    '                sql &= " ," & CommonDB.EncloseVal(pd.GetItem("TXT_NAME_JP").ToString())
-    '                sql &= " ,''"
-    '                sql &= " ," & CommonDB.EncloseVal(pd.GetItem("LBL_FILE").ToString())
-    '                sql &= " ," & CommonDB.EncloseVal(pd.GetItem("TXT_NOTE").ToString())
-    '                sql &= " ," & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
-    '                sql &= " ,'admin'"
-    '                sql &= " ,'MRA-FE-0022'"
-    '                sql &= " ,''"
-    '                sql &= " ,''"
-    '                sql &= " ,''"
-    '                sql &= " ,'0'"
-    '                sql &= ")"
-    '                If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
-    '                    CommonDB.Rollback()
-    '                    Return False
-    '                End If
-    '            Case CommonUtil.LIST_MODE.UPDATE
-    '                sql = ""
-    '                sql &= "UPDATE m_menu"
-    '                sql &= "   SET menu_nm_vn = " & CommonDB.EncloseVal(pd.GetItem("TXT_NAME_VN").ToString())
-    '                sql &= "      ,menu_nm_jp = " & CommonDB.EncloseVal(pd.GetItem("TXT_NAME_JP").ToString())
-    '                sql &= "      ,menu_img = " & CommonDB.EncloseVal(pd.GetItem("LBL_FILE").ToString())
-    '                sql &= "      ,note = " & CommonDB.EncloseVal(pd.GetItem("TXT_NOTE").ToString())
-    '                sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
-    '                sql &= "      ,upd_user_id  = 'admin'"
-    '                sql &= "      ,upd_pgm_id   = 'MRA-FE-0022'"
-    '                sql &= " WHERE menu_id = " & CommonDB.EncloseVal(pd.GetItem("LBL_MENU_ID").ToString())
-    '                If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
-    '                    CommonDB.Rollback()
-    '                    Return False
-    '                End If
-    '            Case CommonUtil.LIST_MODE.DELETE
-    '                sql = ""
-    '                sql &= "UPDATE m_menu"
-    '                sql &= "   SET del_fg = '1'"
-    '                sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
-    '                sql &= "      ,upd_user_id  = 'admin'"
-    '                sql &= "      ,upd_pgm_id   = 'MRA-FE-0022'"
-    '                sql &= " WHERE menu_id = " & CommonDB.EncloseVal(pd.GetItem("LBL_MENU_ID").ToString())
-    '                If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
-    '                    CommonDB.Rollback()
-    '                    Return False
-    '                End If
-    '        End Select
-    '        CommonDB.Commit()
-    '        Return True
-    '    Catch ex As Exception
-    '        CommonDB.Rollback()
-    '        Throw ex
-    '    End Try
-    'End Function
-    ''' <summary>
-    ''' seq_m_menu
-    ''' </summary>
-    ''' <returns>seq_m_menu.NEXTVAL</returns>
     Public Function getSeq(tbl As String) As Integer
         Dim sqll As String
         Try
@@ -199,6 +116,34 @@ Public Class MenuDetail_BL
             Return CommonDB.ExecuteScalar(sqll)
         Catch ex As Exception
             Throw ex
+        End Try
+    End Function
+
+    Public Function fncDelete(ByVal strMenuId As String) As Boolean
+        Dim CommonDB As CommonDB = New CommonDB
+        Try
+            CommonDB.BeginTransaction()
+            Dim sql As String
+            sql = ""
+            sql &= "UPDATE m_menu"
+            sql &= "   SET del_fg = '1'"
+            sql &= "      ,upd_dt = " & CommonDB.EncloseVal(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sql &= "      ,upd_user_id  = 'admin'"
+            sql &= "      ,upd_pgm_id   = 'MRA-FE-0022'"
+            sql &= " WHERE menu_id = " & CommonDB.EncloseVal(strMenuId)
+            If Not CommonDB.ExecuteNonQuery(sql) = 1 Then
+                CommonDB.Rollback()
+                Return False
+            End If
+            CommonDB.Commit()
+            Return True
+        Catch ex As Exception
+            CommonDB.Rollback()
+            Throw ex
+        Finally
+            If Not CommonDB Is Nothing Then
+                CommonDB.Dispose()
+            End If
         End Try
     End Function
 End Class
