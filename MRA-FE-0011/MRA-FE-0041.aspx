@@ -18,11 +18,15 @@
     <hed:PageHeader ID="PageHeader" runat="server"></hed:PageHeader>
     <!--Header -->
     <div class="header">
-         <div class="logo"></div><div class="title">Order List</div>
-        <div class="top-info">
-            
-        </div>
-    </div>
+          <div class="logo"> </div><div class="title">Order List</div>
+                <div class="top-info" onclick="menuToggle();">
+                    <div class="menu">
+                      <ul>
+                         <li><a href="MRA-FE-0011.aspx">Log out</a></li>
+                      </ul>
+                        </div>
+                </div>
+     </div>
     <form id="form1" runat="server" EnableViewState="false" autocomplete="off">
         <!--Content -->
         <div>
@@ -122,5 +126,11 @@
         </div><!-- content-area end -->
     </form>
     <!--End Container -->
+        <script>/*user icon header menu*/
+          function menuToggle() {
+              const toggleMenu = document.querySelector('.menu');
+              toggleMenu.classList.toggle('active');
+          }
+        </script>
 </body>
 </html>

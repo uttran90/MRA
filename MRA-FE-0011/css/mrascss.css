@@ -142,6 +142,42 @@ body {
     margin: 25px 20px 20px 0;
     position: relative;
 }
+    .top-info .menu {
+        position: absolute;
+        right: -10px;
+        border-radius: 4px;
+        transition: 0.5s;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+        .top-info .menu.active {
+            z-index: 1;
+            top: 40px;
+            visibility: visible;
+            opacity: 1;
+            background: #eec2a5;
+        }
+
+        .top-info .menu ul li {
+            list-style: none;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+        }
+
+            .top-info .menu ul li:hover {
+                opacity: 1;
+            }
+
+            .top-info .menu ul li a {
+                text-decoration: none;
+                transition: 0.5s;
+                width: 80px;
+            }
+
+            .top-info .menu ul li:hover a {
+                color: #eb423c;
+            }
 .content-area {
     margin: 1px;
     width: 100%;
