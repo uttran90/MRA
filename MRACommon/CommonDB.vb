@@ -35,7 +35,7 @@ Public Class CommonDB
         Console.WriteLine("DB Transaction Rollbacked")
     End Sub
     Public Function ExecuteFill(ByVal query As String) As DataTable
-        Dim cmd As MySqlCommand = New MySqlCommand()
+        Dim cmd As MySqlCommand = New MySqlCommand("SET CHARACTER SET utf8", connection)
         Dim da As MySqlDataAdapter = New MySqlDataAdapter
         Dim dt As DataTable = New DataTable
         Try
@@ -59,7 +59,7 @@ Public Class CommonDB
         Return dt
     End Function
     Public Function ExecuteScalar(ByVal query As String) As Object
-        Dim cmd As MySqlCommand = New MySqlCommand()
+        Dim cmd As MySqlCommand = New MySqlCommand("SET CHARACTER SET utf8", connection)
         Dim rtn As Object
         Try
             cmd.Connection = Me.connection
@@ -83,7 +83,7 @@ Public Class CommonDB
         Return rtn
     End Function
     Public Function ExecuteNonQuery(ByVal query As String) As Integer
-        Dim cmd As MySqlCommand = New MySqlCommand
+        Dim cmd As MySqlCommand = New MySqlCommand("SET CHARACTER SET utf8", connection)
         Dim rtn As Integer = -1
         Try
             cmd.Connection = Me.connection
