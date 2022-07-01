@@ -31,20 +31,25 @@ Public Class MRA_FE_0011
         Dim dt As DataTable
         strUser = TXT_ID.Value
         strPass = TXT_PW.Value
-        'warning when user, pass is null
-        If Not ChkEmptyInput() Then
-            If Trim(strUser) <> "" And Trim(strPass) <> "" Then
-                dt = BL.GetLogin(strUser, strPass)
-                'warning when user, pass is not exist
-                If dt.Rows(0)("count") = 0 Then
-                    AddMessage("MSG_0011_03")
-                Else
-                    Response.Redirect("MRA-FE-0021.aspx")
-                    Session("user_id") = Trim(strUser)
-                    HttpContext.Current.Session.Add("user_id", strUser)
+        Try
+            'warning when user, pass is null
+            If Not ChkEmptyInput() Then
+                If Trim(strUser) <> "" And Trim(strPass) <> "" Then
+                    Dim strHaspass As String = MRACommon.CommonUtil.fncMD5hashPass(strPass)
+                    dt = BL.GetLogin(strUser, strHaspass)
+                    'warning when user, pass is not exist
+                    If dt.Rows(0)("count") = 0 Then
+                        AddMessage("MSG_0011_03")
+                    Else
+                        Response.Redirect("MRA-FE-0021.aspx")
+                        Session("user_id") = Trim(strUser)
+                        HttpContext.Current.Session.Add("user_id", strUser)
+                    End If
                 End If
             End If
-        End If
+        Catch ex As Exception
+            AddMessage("MSG_9000_01", {ex.Message})
+        End Try
     End Sub
 
     Private Function ChkEmptyInput() As Boolean

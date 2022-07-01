@@ -3,7 +3,7 @@ Imports System.Threading.Tasks
 Imports System.Security.Cryptography
 
 Public Module CommonUtil
-
+    Public Const PREFIX_PASS = "MRAWEB"
     Public Const SHORI_MODE = "SHORI_MODE"
     Public Const STATE_MODE = "STATE_MODE"
     ''' <summary>
@@ -105,5 +105,41 @@ Public Module CommonUtil
             msgStr = "[" & msgId & "] : not found messages.xml"
         End If
         Return msgStr
+    End Function
+
+    Public Function fncMD5hashPass(ByVal strPass As String) As String
+        Dim strData As String = PREFIX_PASS & strPass
+        Dim md5 As MD5
+        Dim hashData As Byte()
+        Dim strDatabuilder As New StringBuilder
+        Try
+            md5 = MD5.Create()
+            hashData = md5.ComputeHash(Encoding.Default.GetBytes(strData))
+            For i As Integer = 0 To hashData.Length - 1
+                strDatabuilder.Append(hashData(i).ToString())
+            Next
+            Return strDatabuilder.ToString()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Check pass
+    ''' </summary>
+    ''' <param name="inputData"></param>
+    ''' <param name="storedHashData"></param>
+    ''' <returns></returns>
+    Public Function ValidateMD5HashData(ByVal inputData As String, ByVal storedHashData As String) As Boolean
+        Dim strHashInputdata As String = ""
+        Try
+            strHashInputdata = fncMD5hashPass(inputData)
+            If String.Compare(strHashInputdata, storedHashData) = 0 Then
+                Return True
+            End If
+            Return False
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 End Module
