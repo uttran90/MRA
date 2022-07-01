@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class MRA_FE_0011
 
     '''<summary>
+    '''PageHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PageHeader As Global.MRA_FW.PageHeader
+
+    '''<summary>
     '''form1 control.
     '''</summary>
     '''<remarks>

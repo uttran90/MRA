@@ -1,7 +1,9 @@
 ﻿html {
     font-family:'MS Gothic','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
+.alert {
+    margin-bottom:0px !important
+}
 body {
     margin: 0;
     border: 1px solid #c7c7c7;
@@ -203,22 +205,13 @@ body {
     padding: 0px, 10px;
     position: absolute;
 }
-.div-footer {
-    width:100%;
-    position: absolute;
-    bottom: 0px;
-    text-align: center;
+
+/*1 row in search*/
+.div-search {
+    width: 600px;
+    border: 1px solid #c7c7c7;
+    border-radius: 6px;
 }
-    .div-footer p {
-        color:#000;
-        font-size:11pt;
-    }
-    /*1 row in search*/
-    .div-search {
-        width: 600px;
-        border: 1px solid #c7c7c7;
-        border-radius: 6px;
-    }
 /*2 row in search*/
 .div-search2 {
     width: 600px;
