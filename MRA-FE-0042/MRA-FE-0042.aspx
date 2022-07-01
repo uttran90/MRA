@@ -68,7 +68,7 @@
                                 <div class="tile is-parent is-vertical">
                                     <div class="table-container table-responsive">
                                          <asp:GridView ShowHeaderWhenEmpty="true" ID="GRD_DATA" runat="server" AutoGenerateColumns="False" AllowPaging="True"  
-                                               PageSize="10" class="table table-bordered" ShowFooter="true" OnRowEditing="OnRowEditing" OnRowDeleting="OnRowDeleting" DataKeyNames="table_order_id">
+                                               PageSize="10" class="table table-bordered"  OnRowEditing="OnRowEditing" OnRowDeleting="OnRowDeleting" DataKeyNames="table_order_id">
                                                 <Columns>
                                                     <asp:BoundField DataField="num" HeaderText="No" ControlStyle-Width="10px" ReadOnly ="true"/>
                                                     <asp:BoundField ItemStyle-CssClass="text-nowrap" DataField="table_order_id" HeaderText="Table  <br /> Order ID" HtmlEncode="false" ControlStyle-Width="15px" ReadOnly ="true"/>
