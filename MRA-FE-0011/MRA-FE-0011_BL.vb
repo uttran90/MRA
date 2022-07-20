@@ -32,4 +32,20 @@ Public Class Login_BL
         End Try
         Return dtLogin
     End Function
+    Public Function GetRoleLogin(ByVal strUserId As String) As DataTable
+        Dim sql As String = String.Empty
+        Dim dtLogin As DataTable = Nothing
+        Try
+            sql = ""
+            sql &= "select role_id "
+            sql &= "  from m_user mu"
+            sql &= " where  mu.user_id = " & CommonDB.EncloseVal(strUserId)
+            sql &= "   and  mu.del_fg <> '1' "
+            dtLogin = CommonDB.ExecuteFill(sql)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        Return dtLogin
+    End Function
 End Class

@@ -27,8 +27,12 @@ Public Class MRA_FE_0011
         ClearMessages()
         ClearError(form1)
         Dim strUser As String
-        Dim strPass As String
+        Dim strPass As String        
         Dim dt As DataTable
+
+        Dim strR As String
+        Dim dtRole As DataTable
+        
         strUser = TXT_ID.Value
         strPass = TXT_PW.Value
         Try
@@ -37,10 +41,17 @@ Public Class MRA_FE_0011
                 If Trim(strUser) <> "" And Trim(strPass) <> "" Then
                     Dim strHaspass As String = MRACommon.CommonUtil.fncMD5hashPass(strPass)
                     dt = BL.GetLogin(strUser, strHaspass)
+                    dtRole = BL.GetRoleLogin(strUser)
                     'warning when user, pass is not exist
                     If dt.Rows(0)("count") = 0 Then
                         AddMessage("MSG_0011_03")
                     Else
+                        If dtRole.Rows.Count > 0 Then
+                            Dim row As DataRow = dtRole.Rows(0)
+                            strR = row("role_id")
+                            Session("role_id") = Trim(strR)
+                            HttpContext.Current.Session.Add("role_id", strR)
+                        End If
                         Response.Redirect("MRA-FE-0021.aspx")
                         Session("user_id") = Trim(strUser)
                         HttpContext.Current.Session.Add("user_id", strUser)
